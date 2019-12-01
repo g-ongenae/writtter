@@ -1,9 +1,10 @@
 const Boom = require("boom");
 
+const Config = require("./src/Config");
 const server = require("./src/Server");
 
 server
-  .start()
+  .start(Config.PORT)
   .then(() => {
     console.info("Server launched");
   })

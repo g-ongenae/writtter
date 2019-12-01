@@ -6,8 +6,7 @@ class Config {
     this.USERNAME = this.get("DB_USERNAME", "root");
     this.PASSWORD = this.get("PASSWORD");
     this.DATABASE = this.get("DATABASE", "writtter");
-
-    console.error("Config", JSON.stringify(this));
+    this.PORT = this.get("PORT", 8080);
   }
 
   get(name, defaultValue) {

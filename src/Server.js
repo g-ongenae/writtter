@@ -34,7 +34,7 @@ class Server {
     this.db.close();
   }
 
-  async start(port = 8080) {
+  async start(port) {
     await this.db.connect();
     this.server = this.app.listen(port, () => {
       console.info(`Server listening on port ${port}`);
