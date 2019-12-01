@@ -1,0 +1,88 @@
+{
+  "name": "writtter",
+  "version": "0.0.1",
+  "description": "Back-End of the Writtter website.",
+  "main": "index.js",
+  "scripts": {
+    "install-global": "npm i -g nodemon",
+    "clean-file": "rm -fR ./dist/ ./yarn-error.log ./coverage/ ./.nyc_output/",
+    "clean-all": "npm run clean-file && rm -fR ./node_modules/",
+    "prettier": "prettier --write {src,test,schemas,templates}/{**/,}*.json {**/,}{**/,}*.{js,md} openapi.yaml",
+    "lint": "eslint ./src/*.js ./src/**/*.js",
+    "pretest": "npm run lint",
+    "test": "mocha",
+    "posttest": "npm audit --only=prod",
+    "cover": "nyc --reporter=html --reporter=lcov npm run test",
+    "start": "node ./index.js",
+    "dev": "nodemon --watch 'src/**/*.js' --exec node -- ./index.js",
+    "debug": "NODE_ENV=default node --inspect ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g-ongenae/writtter.git"
+  },
+  "keywords": [
+    "writing",
+    "stories"
+  ],
+  "author": "Guillaume Ongenae",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/g-ongenae/writtter/issues"
+  },
+  "homepage": "https://github.com/g-ongenae/writtter#readme",
+  "devDependencies": {
+    "eslint": "6.7.2",
+    "eslint-config-prettier": "6.7.0",
+    "husky": "3.1.0",
+    "lint-staged": "9.5.0",
+    "mocha": "6.2.2",
+    "nyc": "14.1.1",
+    "prettier": "1.19.1",
+    "supertest": "4.0.2"
+  },
+  "dependencies": {
+    "ajv": "6.10.2",
+    "boom": "7.3.0",
+    "config": "3.2.4",
+    "koa": "2.11.0",
+    "koa-bodyparser": "4.2.1",
+    "koa-helmet": "5.2.0",
+    "koa-log": "2.1.0",
+    "koa-router": "7.4.0",
+    "lodash": "4.17.15",
+    "mysql": "2.17.1",
+    "node-emoji": "1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/**/*.md": [
+      "prettier --list-different \"**/**/*.md\""
+    ],
+    "./openapi.yaml": [
+      "prettier --list-different \"./openapi.yaml\""
+    ],
+    "**/**/*.js": [
+      "prettier --list-different \"**/**/**.js\""
+    ],
+    "{schema,src,test}/{**/,}**.json": [
+      "prettier --list-different \"{schema,src,test}/{**/,}**.json\""
+    ]
+  },
+  "nyc": {
+    "check-coverage": false,
+    "per-file": true,
+    "lines": 60,
+    "statements": 60,
+    "functions": 60,
+    "branches": 60,
+    "cache": false,
+    "extension": [
+      ".js"
+    ]
+  }
+}
