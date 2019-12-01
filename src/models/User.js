@@ -37,5 +37,10 @@ module.exports = class User {
     );
   }
 
-  async update() {}
+  async update(id) {
+    const updates = "";
+    return db.query(
+      `UPDATE ${this.names.table} SET ${updates} WHERE ${this.names.id} = ${id}`
+    );
+  }
 };
