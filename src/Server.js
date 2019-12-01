@@ -5,9 +5,12 @@ const Koa = require("koa");
 const log = require("koa-log");
 const Router = require("koa-router");
 
+const db = require("./Database");
+
 class Server {
   constructor() {
     this.app = new Koa();
+    this.db = db;
 
     this.middleware();
     this.routes();
@@ -15,6 +18,9 @@ class Server {
 
   getApp() {
     return this.app;
+  }
+  getDatabase() {
+    return this.db;
   }
   getServer() {
     return this.server;
@@ -24,9 +30,12 @@ class Server {
     if (this.server) {
       this.server = this.server.close();
     }
+
+    this.db.close();
   }
 
-  start(port = 8080) {
+  async start(port = 8080) {
+    await this.db.connect();
     this.server = this.app.listen(port, () => {
       console.info(`Server listening on port ${port}`);
     });
@@ -39,10 +48,11 @@ class Server {
   }
 
   routes() {
-    console.debug("Open routes");
+    console.debug("Opening routes");
     const router = new Router();
-    router.get("/", async _ctx => {
-      throw Boom.badRequest("Path does not exists");
+    router.get("/", async ctx => {
+      ctx.body = await this.db.query("SELECT * FROM test");
+      // throw Boom.badRequest("Path does not exists");
     });
 
     this.app.use(router.routes());
