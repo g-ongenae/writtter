@@ -41,9 +41,15 @@ module.exports = class UserRouter {
     console.log("id", ctx);
 
     try {
+      const user = await user.getData();
+
+      if (!user) {
+        throw Boom.notFound();
+      }
+
       ctx.message = "OK — User found";
       ctx.status = 200;
-      ctx.body = await user.getData();
+      ctx.body = user;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
