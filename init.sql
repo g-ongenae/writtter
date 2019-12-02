@@ -62,7 +62,7 @@ CREATE TABLE edits (
     storyId INT NOT NULL,
     edition TEXT,
     editedAt DATETIME,
-    FOREIGN KEY (ownerId) REFERENCES users(id),
+    FOREIGN KEY (editorId) REFERENCES users(id),
     FOREIGN KEY (storyId) REFERENCES stories(id)
 );
 
@@ -70,5 +70,6 @@ CREATE TABLE comments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     authorId INT NOT NULL,
     createdAt DATETIME,
-    content VARCHAR(2000) NOT NULL
+    content VARCHAR(2000) NOT NULL,
+    FOREIGN KEY (authorId) REFERENCES users(id)
 );
