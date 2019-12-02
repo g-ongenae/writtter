@@ -6,6 +6,7 @@ const log = require("koa-log");
 const Router = require("koa-router");
 
 const db = require("./Database");
+const UserRouter = require("./routes/UserRouter");
 
 class Server {
   constructor() {
@@ -56,6 +57,8 @@ class Server {
     });
 
     this.app.use(router.routes());
+    const user = new UserRouter();
+    this.app.use(user.router.routes());
   }
 }
 

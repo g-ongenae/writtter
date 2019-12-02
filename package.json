@@ -55,7 +55,9 @@
     "koa-router": "7.4.0",
     "lodash": "4.17.15",
     "node-emoji": "1.10.0",
-    "promise-mysql": "4.1.1"
+    "postguard": "0.2.0",
+    "promise-mysql": "4.1.1",
+    "squid": "0.5.1"
   },
   "husky": {
     "hooks": {

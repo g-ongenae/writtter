@@ -1,34 +1,68 @@
+const { defineTable, Schema, sql } = require("squid");
+
 const db = require("../Database");
 
+defineTable("users", {
+  id: Schema.Number,
+  username: Schema.String,
+  email: Schema.String,
+  password: Schema.String,
+  joinedAt: Schema.default(Schema.Date),
+  active: Schema.Boolean,
+  score: Schema.Number
+});
+
 module.exports = class User {
-  constructor() {
-    this.names = {
-      table: "users",
-      id: "id",
-      username: "username",
-      score: "score",
-      joined: "joined",
-      email: "email",
-      password: "password"
-    };
+  constructor(id) {
+    this._id = id;
   }
 
-  async getById(id) {
-    return db.query(
-      `SELECT * FROM ${this.names.table} WHERE ${this.names.id} = ${id}`
-    );
+  async getId() {
+    return this._id;
   }
 
-  async getIdByUsername(username) {
-    return db.query(
-      `SELECT ${this.names.id} FROM ${this.names.table} WHERE ${this.names.username} = ${username}`
-    );
+  async save(values) {
+    const res = await db.query(sql`INSERT INTO users ${spreadInsert(values)}`);
+    console.log(res);
+
+    this._id = res;
+
+    return this._id;
   }
 
-  async update(id) {
-    const updates = "";
+  async getData() {
+    if (!this._id) {
+      throw new Error("No id");
+    }
+
+    return db.query(sql`SELECT * FROM users WHERE id = ${this._id}`);
+  }
+
+  async remove() {
+    if (!this._id) {
+      throw new Error("No id");
+    }
+
+    return db.query(sql`DELETE FROM users WHERE id = ${this._id}`);
+  }
+
+  async update(values) {
+    if (!this._id) {
+      throw new Error("No id");
+    }
+
+    const res = await db.query(sql`
+            UPDATE users
+            SET ${spreadUpdate(values)}
+            WHERE id = ${this._id}
+        `);
+
+    return res;
+  }
+
+  async search(value) {
     return db.query(
-      `UPDATE ${this.names.table} SET ${updates} WHERE ${this.names.id} = ${id}`
+      sql`SELECT id FROM users WHERE username IS LIKE '%${value}%'`
     );
   }
 };
