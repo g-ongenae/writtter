@@ -3,7 +3,7 @@
  */
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
     joinedAt DATETIME DEFAULT CURRENT_TIME,
     email VARCHAR(50) NOT NULL,
@@ -13,8 +13,10 @@ CREATE TABLE users (
     UNIQUE KEY(username, email)
 );
 
+/*
+
 CREATE TABLE rules (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     ownerId INT DEFAULT 0,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(2000) NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE rules (
 );
 
 CREATE TABLE competitions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     creatorId INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(2000) NOT NULL,
@@ -38,7 +40,7 @@ CREATE TABLE competitions (
 );
 
 CREATE TABLE stories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     ownerId INT NOT NULL,
     competitionId INT,
     name VARCHAR(50) NOT NULL,
@@ -54,7 +56,7 @@ CREATE TABLE stories (
 );
 
 CREATE TABLE edits (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     editorId INT NOT NULL,
     storyId INT NOT NULL,
     edition TEXT,
@@ -64,8 +66,10 @@ CREATE TABLE edits (
 );
 
 CREATE TABLE comments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     authorId INT NOT NULL,
     createdAt DATETIME DEFAULT CURRENT_TIME,
     content VARCHAR(2000) NOT NULL
 );
+
+*/
