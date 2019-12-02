@@ -54,6 +54,8 @@ module.exports = class UserRouter {
       if (error.message == "No id") {
         throw Boom.badRequest();
       }
+
+      throw error;
     }
   }
 
