@@ -9,8 +9,11 @@ server
   .then(async () => {
     console.info("Server launched");
     const content = await promises.readFile("./init.sql", "utf-8");
-    const res = await server.db.query(content);
-    console.log(res);
+    const contents = content.split(";");
+    for (const c of contents) {
+      const res = await server.db.query(`${c};`);
+      console.log(res);
+    }
     await server.db.query(
       "INSERT INTO users VALUES ('guillaume', '2019-12-1', 'guillaume.ongenae@gmail.com', 'example');"
     );
