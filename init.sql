@@ -3,9 +3,9 @@
  */
 
 CREATE TABLE users (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
-    joinedAt DATETIME DEFAULT NOW(),
+    joinedAt DATETIME DEFAULT CURRENT_TIME,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     active BOOLEAN DEFAULT TRUE,
@@ -14,22 +14,22 @@ CREATE TABLE users (
 );
 
 CREATE TABLE rules (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     ownerId INT DEFAULT 0,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(2000) NOT NULL,
-    createdAt DATETIME DEFAULT NOW(),
+    createdAt DATETIME DEFAULT CURRENT_TIME,
     isPublic BOOLEAN DEFAULT TRUE,
     data JSON,
     FOREIGN KEY (ownerId) REFERENCES users(id)
 );
 
 CREATE TABLE competitions (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     creatorId INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(2000) NOT NULL,
-    createdAt DATETIME DEFAULT NOW(),
+    createdAt DATETIME DEFAULT CURRENT_TIME,
     finishAt DATETIME,
     winnerId INT,
     rules JSON, -- list of rule to validate to participate in the competition
@@ -38,13 +38,13 @@ CREATE TABLE competitions (
 );
 
 CREATE TABLE stories (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     ownerId INT NOT NULL,
     competitionId INT,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(2000),
-    createdAt DATETIME DEFAULT NOW(),
-    lastEditedAt DATETIME DEFAULT NOW(),
+    createdAt DATETIME DEFAULT CURRENT_TIME,
+    lastEditedAt DATETIME DEFAULT CURRENT_TIME,
     isPublic BOOLEAN DEFAULT TRUE,
     semaphore BOOLEAN DEFAULT FALSE,
     content TEXT,
@@ -54,18 +54,18 @@ CREATE TABLE stories (
 );
 
 CREATE TABLE edits (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     editorId INT NOT NULL,
     storyId INT NOT NULL,
     edition TEXT,
-    editedAt DATETIME DEFAULT NOW(),
+    editedAt DATETIME DEFAULT CURRENT_TIME,
     FOREIGN KEY (ownerId) REFERENCES users(id),
-    FOREIGN KEY (storyId) REFERENCES stories(id),
+    FOREIGN KEY (storyId) REFERENCES stories(id)
 );
 
 CREATE TABLE comments (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     authorId INT NOT NULL,
-    createdAt DATETIME DEFAULT NOW(),
-    content VARCHAR(2000) NOT NULL,
-)
+    createdAt DATETIME DEFAULT CURRENT_TIME,
+    content VARCHAR(2000) NOT NULL
+);
