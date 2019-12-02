@@ -4,7 +4,7 @@ const {
   spreadInsert,
   spreadUpdate,
   sql
-} = require("squid");
+} = require("squid/pg");
 
 const db = require("../Database");
 
