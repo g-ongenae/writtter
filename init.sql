@@ -3,11 +3,11 @@
  */
 
 CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
-    joinedAt DATETIME DEFAULT CURRENT_TIME,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    id INT PRIMARY KEY,
+    username VARCHAR(50),
+    joinedAt DATETIME,
+    email VARCHAR(50),
+    password VARCHAR(50),
     active BOOLEAN DEFAULT TRUE,
     score INT DEFAULT 0,
     UNIQUE KEY(username, email)
