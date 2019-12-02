@@ -13,18 +13,6 @@ module.exports = class User {
     };
   }
 
-  async init() {
-    return db.query(`CREATE TABLE ${this.names.table} (
-            ${this.names.id} INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            ${this.names.username} VARCHAR(50) NOT NULL,
-            ${this.names.score} INT DEFAULT 0,
-            ${this.names.joined} DATETIME DEFAULT NOW(),
-            ${this.names.email} VARCHAR(50) NOT NULL,
-            ${this.names.password} VARCHAR(50) NOT NULL,
-            UNIQUE KEY(${this.names.username}, ${this.names.email})
-        );`);
-  }
-
   async getById(id) {
     return db.query(
       `SELECT * FROM ${this.names.table} WHERE ${this.names.id} = ${id}`
