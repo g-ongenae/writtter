@@ -1,4 +1,10 @@
-const { defineTable, Schema, sql } = require("squid");
+const {
+  defineTable,
+  Schema,
+  spreadInsert,
+  spreadUpdate,
+  sql
+} = require("squid");
 
 const db = require("../Database");
 
@@ -22,9 +28,7 @@ module.exports = class User {
   }
 
   async save(values) {
-    const res = await db.query(
-      sql`INSERT INTO users ${sql.spreadInsert(values)}`
-    );
+    const res = await db.query(sql`INSERT INTO users ${spreadInsert(values)}`);
     console.log(res);
 
     this._id = res;
@@ -55,7 +59,7 @@ module.exports = class User {
 
     const res = await db.query(sql`
             UPDATE users
-            SET ${sql.spreadUpdate(values)}
+            SET ${spreadUpdate(values)}
             WHERE id = ${this._id}
         `);
 
