@@ -1,4 +1,10 @@
-const { defineTable, Schema, sql } = require("squid");
+const {
+  defineTable,
+  Schema,
+  spreadInsert,
+  spreadUpdate,
+  sql
+} = require("squid");
 
 const db = require("../Database");
 
