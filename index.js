@@ -10,6 +10,7 @@ server
     console.info("Server launched");
     const content = await promises.readFile("./init.sql", "utf-8");
     const contents = content.split(";");
+    contents.pop();
     for (const c of contents) {
       const res = await server.db.query(`${c};`);
       console.log(c, res);
