@@ -51,7 +51,7 @@ class Server {
     console.debug("Opening routes");
     const router = new Router();
     router.get("/", async ctx => {
-      ctx.body = await this.db.query("SELECT * FROM test");
+      ctx.body = await this.db.query("SELECT * FROM users");
       // throw Boom.badRequest("Path does not exists");
     });
 

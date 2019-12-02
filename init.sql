@@ -2,6 +2,8 @@
  * TABLES
  */
 
+DROP TABLE users;
+
 CREATE TABLE users (
     id INT PRIMARY KEY,
     username VARCHAR(50),
@@ -12,6 +14,8 @@ CREATE TABLE users (
     score INT DEFAULT 0,
     UNIQUE KEY(username, email)
 );
+
+INSERT INTO users VALUES ('guillaume', '2019-12-1', 'guillaume.ongenae@gmail.com', 'example');
 
 /*
 
