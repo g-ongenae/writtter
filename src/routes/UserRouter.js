@@ -28,7 +28,7 @@ module.exports = class UserRouter {
   }
 
   async _put(ctx) {
-    const user = new User(ctx.query.id);
+    const user = new User(ctx.request.query.id);
     await user.update(ctx.request.body);
 
     ctx.message = "OK";
@@ -37,7 +37,7 @@ module.exports = class UserRouter {
   }
 
   async _get(ctx) {
-    const user = new User(ctx.query.id);
+    const user = new User(ctx.request.query.id);
     console.log("id", ctx);
 
     try {
@@ -52,7 +52,7 @@ module.exports = class UserRouter {
   }
 
   async _delete(ctx) {
-    const user = new User(ctx.query.id);
+    const user = new User(ctx.request.query.id);
 
     const userId = user.getId();
     await user.remove();
