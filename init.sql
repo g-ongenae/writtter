@@ -1,5 +1,3 @@
-DROP TABLE users;
-
 CREATE TABLE users (
     id INT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
