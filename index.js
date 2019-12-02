@@ -12,7 +12,7 @@ server
     const contents = content.split(";");
     for (const c of contents) {
       const res = await server.db.query(`${c};`);
-      console.log(res);
+      console.log(c, res);
     }
     await server.db.query(
       "INSERT INTO users VALUES ('guillaume', '2019-12-1', 'guillaume.ongenae@gmail.com', 'example');"
