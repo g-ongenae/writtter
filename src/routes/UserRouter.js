@@ -38,18 +38,17 @@ module.exports = class UserRouter {
 
   async _get(ctx) {
     const user = new User(ctx.params.id);
-    console.log("id", ctx);
 
     try {
-      const user = await user.getData();
+      const userData = await user.getData();
 
-      if (!user) {
+      if (!userData) {
         throw Boom.notFound();
       }
 
       ctx.message = "OK — User found";
       ctx.status = 200;
-      ctx.body = user;
+      ctx.body = userData;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
