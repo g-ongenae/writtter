@@ -38,7 +38,7 @@ module.exports = class UserRouter {
 
   async _get(ctx) {
     const user = new User(ctx.query.id);
-    console.log("id", ctx.query);
+    console.log("id", ctx);
 
     try {
       ctx.message = "OK — User found";
