@@ -1,3 +1,4 @@
+const Boom = require("boom");
 const Router = require("koa-router");
 
 const User = require("../models/User");
@@ -37,10 +38,17 @@ module.exports = class UserRouter {
 
   async _get(ctx) {
     const user = new User(ctx.query.id);
+    console.log("id", ctx.query);
 
-    ctx.message = "OK — User found";
-    ctx.status = 200;
-    ctx.body = await user.getData();
+    try {
+      ctx.message = "OK — User found";
+      ctx.status = 200;
+      ctx.body = await user.getData();
+    } catch (error) {
+      if (error.message == "No id") {
+        throw Boom.badRequest();
+      }
+    }
   }
 
   async _delete(ctx) {
