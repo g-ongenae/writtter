@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `rules`;
+DROP TABLE IF EXISTS `competitions`;
+DROP TABLE IF EXISTS `stories`;
+DROP TABLE IF EXISTS `edits`;
+DROP TABLE IF EXISTS `comments`;
+
 CREATE TABLE users (
     id INT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
