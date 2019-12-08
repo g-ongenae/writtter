@@ -9,12 +9,15 @@ module.exports = class ApiRouter {
 
   routes() {
     console.debug("Started OpenAPI Router");
+    console.info("Started OpenAPI Router");
+    console.log("Started OpenAPI Router");
+    console.warn("Started OpenAPI Router");
     this.router.get("/", this._getApi);
   }
 
   async _getApi(ctx) {
     console.debug("Get OpenAPI file");
-    const OpenAPI = await promises.readFile("./openapi.yaml", "utf-8");
+    const OpenAPI = await promises.readFile("../../openapi.yaml", "utf-8");
 
     ctx.message = "OK";
     ctx.status = 200;
