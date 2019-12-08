@@ -6,6 +6,7 @@ const log = require("koa-log");
 const Router = require("koa-router");
 
 const db = require("./Database");
+const ErrorHandler = require("./middleware/ErrorHandler");
 const ApiRouter = require("./routes/ApiRouter");
 const CommentRouter = require("./routes/CommentRouter");
 const CompetitionRouter = require("./routes/CompetitionRouter");
@@ -52,6 +53,7 @@ class Server {
     this.app.use(log());
     this.app.use(helmet());
     this.app.use(bodyParser());
+    this.app.use(ErrorHandler);
   }
 
   routes() {
