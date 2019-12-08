@@ -5,18 +5,19 @@ DROP TABLE IF EXISTS `competitions`;
 DROP TABLE IF EXISTS `rules`;
 DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE users (
-    id INT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
     joinedAt DATETIME,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     active BOOLEAN DEFAULT TRUE,
     score INT DEFAULT 0,
-    UNIQUE KEY(username, email)
+    UNIQUE KEY(username),
+    UNIQUE KEY(email)
 );
 
-CREATE TABLE rules (
+CREATE TABLE IF NOT EXISTS rules (
     id INT PRIMARY KEY AUTO_INCREMENT,
     ownerId INT DEFAULT 0,
     name VARCHAR(50) NOT NULL,
@@ -27,7 +28,7 @@ CREATE TABLE rules (
     FOREIGN KEY (ownerId) REFERENCES users(id)
 );
 
-CREATE TABLE competitions (
+CREATE TABLE IF NOT EXISTS competitions (
     id INT PRIMARY KEY AUTO_INCREMENT,
     creatorId INT NOT NULL,
     name VARCHAR(50) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE competitions (
     FOREIGN KEY (winnerId) REFERENCES users(id)
 );
 
-CREATE TABLE stories (
+CREATE TABLE IF NOT EXISTS stories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     ownerId INT NOT NULL,
     competitionId INT,
@@ -56,7 +57,7 @@ CREATE TABLE stories (
     FOREIGN KEY (competitionId) REFERENCES competitions(id)
 );
 
-CREATE TABLE edits (
+CREATE TABLE IF NOT EXISTS edits (
     id INT PRIMARY KEY AUTO_INCREMENT,
     editorId INT NOT NULL,
     storyId INT NOT NULL,
@@ -66,7 +67,7 @@ CREATE TABLE edits (
     FOREIGN KEY (storyId) REFERENCES stories(id)
 );
 
-CREATE TABLE comments (
+CREATE TABLE IF NOT EXISTS comments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     authorId INT NOT NULL,
     createdAt DATETIME,

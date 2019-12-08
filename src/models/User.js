@@ -29,9 +29,7 @@ module.exports = class User {
 
   async save(values) {
     const res = await db.query(sql`INSERT INTO users ${spreadInsert(values)}`);
-    console.log(res);
-
-    this._id = res;
+    this._id = res.insertId;
 
     return this._id;
   }
@@ -58,10 +56,10 @@ module.exports = class User {
     }
 
     const res = await db.query(sql`
-            UPDATE users
-            SET ${spreadUpdate(values)}
-            WHERE id = ${this._id}
-        `);
+      UPDATE users
+      SET ${spreadUpdate(values)}
+      WHERE id = ${this._id}
+    `);
 
     return res;
   }

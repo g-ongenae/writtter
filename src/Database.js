@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const Boom = require("boom");
 const MySQL = require("promise-mysql");
 
@@ -21,7 +22,14 @@ class Database {
       throw Boom.serverUnavailable("No database connection");
     }
 
-    return this.connection.query(q);
+    if (_.isString(q)) {
+      return this.connection.query(q);
+    } else {
+      q.text = q.text.replace(/"/gi, "");
+      q.text = q.text.replace(/\$\d+/gi, "?");
+
+      return this.connection.query(q.text, q.values);
+    }
   }
 
   async close() {
