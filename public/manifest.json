@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Writtter",
+  "name": "A place to play with words and stories, together.",
   "icons": [
     {
       "src": "favicon.ico",

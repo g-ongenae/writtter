@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prettier": "prettier --write {src,.}/*.{css,js,test.js} README.md"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,6 +36,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "2.1.1"
+    "gh-pages": "2.1.1",
+    "prettier": "1.19.1"
   }
 }
