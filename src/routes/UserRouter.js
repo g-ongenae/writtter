@@ -3,7 +3,7 @@ const Router = require("koa-router");
 
 const User = require("../models/User");
 
-module.exports = class UserRouter {
+class UserRouter {
   constructor(prefix = "/users") {
     this.router = new Router({ prefix });
     this.routes();
@@ -73,4 +73,7 @@ module.exports = class UserRouter {
     const user = new User();
     ctx.body = await user.search(ctx.request.query);
   }
-};
+}
+
+module.exports = new UserRouter();
+module.exports.UserRouter = UserRouter;

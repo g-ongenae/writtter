@@ -58,10 +58,8 @@ class Server {
     });
 
     this.app.use(router.routes());
-    const openApi = new ApiRouter();
-    this.app.use(openApi.router.routes());
-    const user = new UserRouter();
-    this.app.use(user.router.routes());
+    this.app.use(ApiRouter.router.routes());
+    this.app.use(UserRouter.router.routes());
   }
 }
 

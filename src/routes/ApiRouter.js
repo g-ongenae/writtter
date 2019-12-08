@@ -1,7 +1,8 @@
 const { promises } = require("fs");
 const Router = require("koa-router");
+const YAML = require("js-yaml");
 
-module.exports = class ApiRouter {
+class ApiRouter {
   constructor(prefix = "/api") {
     this.router = new Router({ prefix });
     this.routes();
@@ -9,20 +10,22 @@ module.exports = class ApiRouter {
 
   routes() {
     console.debug("Started OpenAPI Router");
-    console.info("Started OpenAPI Router");
-    console.log("Started OpenAPI Router");
-    console.warn("Started OpenAPI Router");
     this.router.get("/", this._getApi);
   }
 
   async _getApi(ctx) {
     console.debug("Get OpenAPI file");
-    const OpenAPI = await promises.readFile("../../openapi.yaml", "utf-8");
+    const OpenAPI = await promises.readFile("./openapi.yaml", "utf-8");
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = OpenAPI;
+    ctx.body = _.isNil(ctx.request.query["json"])
+      ? OpenAPI
+      : YAML.load(OpenAPI);
 
     return;
   }
-};
+}
+
+module.exports = new ApiRouter();
+module.exports.ApiRouter = ApiRouter;

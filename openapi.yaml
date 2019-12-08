@@ -35,6 +35,12 @@ paths:
       summary: Return the OpenAPI file (this file)
       description: Contains the API description of the server
       operationId: getApi
+      parameters:
+        - name: json
+          in: query
+          description: The result should be in JSON or YAML
+          required: false
+          default: false
       responses:
         "200":
           description: The OpenAPI of the Writtter server.
