@@ -7,6 +7,11 @@ const Router = require("koa-router");
 
 const db = require("./Database");
 const ApiRouter = require("./routes/ApiRouter");
+const CommentRouter = require("./routes/CommentRouter");
+const CompetitionRouter = require("./routes/CompetitionRouter");
+const EditRouter = require("./routes/EditRouter");
+const RuleRouter = require("./routes/RuleRouter");
+const StoryRouter = require("./routes/StoryRouter");
 const UserRouter = require("./routes/UserRouter");
 
 class Server {
@@ -52,14 +57,18 @@ class Server {
   routes() {
     console.debug("Opening routes");
     const router = new Router();
-    router.get("/", async ctx => {
-      ctx.body = await this.db.query("SELECT * FROM users");
-      // throw Boom.badRequest("Path does not exists");
+    router.get("/", async _ctx => {
+      throw Boom.badRequest("Path does not exists");
     });
 
     this.app.use(router.routes());
-    this.app.use(ApiRouter.router.routes());
-    this.app.use(UserRouter.router.routes());
+    this.app.use(ApiRouter.routes());
+    this.app.use(CommentRouter.routes());
+    this.app.use(CompetitionRouter.routes());
+    this.app.use(EditRouter.routes());
+    this.app.use(RuleRouter.routes());
+    this.app.use(StoryRouter.routes());
+    this.app.use(UserRouter.routes());
   }
 }
 

@@ -6,16 +6,26 @@ const User = require("../models/User");
 class UserRouter {
   constructor(prefix = "/users") {
     this.router = new Router({ prefix });
-    this.routes();
+    this._routes();
   }
 
   routes() {
+    if (!this.router) {
+      throw new Error("Router not started");
+    }
+
+    return this.router.routes();
+  }
+
+  _routes() {
     this.router.post("/", this._post);
     this.router.get("/:id", this._get);
     this.router.delete("/:id", this._delete);
     this.router.put("/:id", this._put);
     this.router.patch("/:id", this._put);
-    this.router.get("/", this.search);
+    this.router.get("/", this._search);
+    this.router.get("/login", this._login);
+    this.router.get("/logout", this._logout);
   }
 
   async _post(ctx) {
@@ -29,6 +39,7 @@ class UserRouter {
 
   async _put(ctx) {
     const user = new User(ctx.params.id);
+    ctx.request.body.id = ctx.params.id;
     await user.update(ctx.request.body);
 
     ctx.message = "OK";
@@ -69,9 +80,27 @@ class UserRouter {
     ctx.body = userId;
   }
 
-  async search(ctx) {
+  async _search(ctx) {
     const user = new User();
     ctx.body = await user.search(ctx.request.query);
+  }
+
+  async _login(ctx) {
+    console.debug(
+      "User logged in",
+      ctx.request.params,
+      ctx.request.query,
+      ctx.request.body
+    );
+  }
+
+  async _logout(ctx) {
+    console.debug(
+      "User logged out",
+      ctx.request.params,
+      ctx.request.query,
+      ctx.request.body
+    );
   }
 }
 

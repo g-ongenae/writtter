@@ -6,10 +6,18 @@ const YAML = require("js-yaml");
 class ApiRouter {
   constructor(prefix = "/api") {
     this.router = new Router({ prefix });
-    this.routes();
+    this._routes();
   }
 
   routes() {
+    if (!this.router) {
+      throw new Error("Router not started");
+    }
+
+    return this.router.routes();
+  }
+
+  _routes() {
     console.debug("Started OpenAPI Router");
     this.router.get("/", this._getApi);
   }

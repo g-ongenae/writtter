@@ -14,8 +14,8 @@ defineTable("users", {
   email: Schema.String,
   password: Schema.String,
   joinedAt: Schema.default(Schema.Date),
-  active: Schema.Boolean,
-  score: Schema.Number
+  active: Schema.default(Schema.Boolean),
+  score: Schema.default(Schema.Number)
 });
 
 module.exports = class User {
