@@ -1,0 +1,45 @@
+openapi: 3.0.1
+servers:
+  - description: Heroku
+    url: https://writtter.herokuapp.com/
+
+info:
+  description: >-
+    The server of my Web Services course project.
+    The website is a platform to create, read, share and compete on writing stories.
+    There is two main goal of this platform, enabling an emoji to story and making it possible to modify a story as a group in the same time.
+  version: 0.1.0
+  title: Writtter
+  contact:
+    name: Guillaume Ongenae
+    url: "https://g-ongenae.github.io/"
+    email: guillaume.ongenae@gmail.com
+
+tags:
+  - name: User
+    description: data or access related to the users
+  - name: Story
+    description: data or access related to the stories
+  - name: Competition
+    description: data or access related to the competitions
+  - name: Rule
+    description: data or access related to the rules
+  - name: Comment
+    description: data or access related to the comments
+  - name: Meta
+    description: files and others stuff related to the server directly
+
+paths:
+  /api:
+    get:
+      summary: Return the OpenAPI file (this file)
+      description: Contains the API description of the server
+      operationId: getApi
+      responses:
+        "200":
+          description: The OpenAPI of the Writtter server.
+          content:
+            application/yaml:
+              example: >-
+                See here for a complete example
+                https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/api-with-examples.yaml

@@ -6,6 +6,7 @@ const log = require("koa-log");
 const Router = require("koa-router");
 
 const db = require("./Database");
+const ApiRouter = require("./routes/ApiRouter");
 const UserRouter = require("./routes/UserRouter");
 
 class Server {
@@ -57,6 +58,8 @@ class Server {
     });
 
     this.app.use(router.routes());
+    const openApi = new ApiRouter();
+    this.app.use(openApi.router.routes());
     const user = new UserRouter();
     this.app.use(user.router.routes());
   }
