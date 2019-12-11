@@ -51,6 +51,7 @@
     "js-yaml": "3.13.1",
     "koa": "2.11.0",
     "koa-bodyparser": "4.2.1",
+    "koa-cors": "0.0.16",
     "koa-helmet": "5.2.0",
     "koa-log": "2.1.0",
     "koa-router": "7.4.0",

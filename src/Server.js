@@ -1,5 +1,6 @@
 const bodyParser = require("koa-bodyparser");
 const Boom = require("boom");
+const cors = require("koa-cors");
 const helmet = require("koa-helmet");
 const Koa = require("koa");
 const log = require("koa-log");
@@ -51,6 +52,7 @@ class Server {
 
   middleware() {
     this.app.use(log());
+    this.app.use(cors());
     this.app.use(helmet());
     this.app.use(bodyParser());
     this.app.use(ErrorHandler);
