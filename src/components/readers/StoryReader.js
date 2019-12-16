@@ -14,15 +14,13 @@ export default class StoryReader extends Component {
   }
 
   async componentWillMount() {
-    console.log("ICI");
     this.setState({ isLoading: true });
-    console.log("ICI");
+
     try {
       const response = await fetch(`${API_BASE_URL}/stories/${this.storyId}`);
       if (!response.ok) {
         throw new Error("Something went wrong ...");
       }
-      console.log("ICI", response);
       const data = await response.json();
       this.setState({ story: data.story, isLoading: false });
     } catch (error) {
