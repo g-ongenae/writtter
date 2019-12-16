@@ -4,11 +4,13 @@
   "private": true,
   "homepage": "http://g-ongenae.github.io/writtter",
   "dependencies": {
+    "@primer/octicons-react": "9.3.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "5.1.2",
     "react-scripts": "3.3.0"
   },
   "scripts": {
@@ -18,7 +20,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "prettier": "prettier --write {src,.}/*.{css,js,test.js} README.md"
+    "prettier": "prettier --write src/**{,/**}/*.{css,js,test.js} README.md"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -35,4 +35,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ----------------------- ADDED */
+
+h1 {
+  text-align: center;
+}
+
+/* FORMS */
+
+label {
+  font-weight: bold;
+}
+
+.centered {
+  border: solid 1px black;
+
+  /* min-height: 50%;
+  min-height: 50vh;
+  display: flex;
+  align-items: center; */
 }
