@@ -30,7 +30,11 @@ export default class CreateStory extends Component {
             />
           </fieldset>
           <fieldset className="form-group">
-            <input className="form-check-input" type="checkbox" name="isPublic" />
+            <input
+              className="form-check-input"
+              type="checkbox"
+              name="isPublic"
+            />
             <label className="form-check-label">Public Mode</label>
           </fieldset>
           <fieldset className="form-group">
@@ -51,7 +55,11 @@ export default class CreateStory extends Component {
             <TagChoices userId={this.props.userId} />
           </fieldset>
           <fieldset className="form-group text-center">
-            <input type="submit" value="Create story" className="btn btn-primary" />
+            <input
+              type="submit"
+              value="Create story"
+              className="btn btn-primary"
+            />
           </fieldset>
         </form>
       </div>

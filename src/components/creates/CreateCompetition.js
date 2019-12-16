@@ -10,8 +10,8 @@ export default class CreateCompetition extends Component {
     this.state = {
       name: "",
       description: "",
-      finishDate: "",
-    }
+      finishDate: ""
+    };
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class CreateCompetition extends Component {
             <label for="title">Title:</label>
             <input
               value={this.state.name}
-              onChange={this.onChange.bind(this, 'name')}
+              onChange={this.onChange.bind(this, "name")}
               id="name"
               type="text"
               name="name"
@@ -36,7 +36,7 @@ export default class CreateCompetition extends Component {
             <label>Description:</label>
             <textarea
               value={this.state.description}
-              onChange={this.onChange.bind(this, 'description')}
+              onChange={this.onChange.bind(this, "description")}
               name="description"
               className="form-control"
               placeholder="Write a description for your story"
@@ -48,7 +48,11 @@ export default class CreateCompetition extends Component {
             <DatePicker competition={this} />
           </fieldset>
           <fieldset className="form-group">
-            <input className="form-check-input" type="checkbox" name="isPublic" />
+            <input
+              className="form-check-input"
+              type="checkbox"
+              name="isPublic"
+            />
             <label className="form-check-label">Public Mode</label>
           </fieldset>
           <fieldset className="form-group">
@@ -89,7 +93,7 @@ function DatePicker({ binder }) {
     <div className="input-group date">
       <input
         value={this.state.finishDate}
-        onChange={this.onChange.bind(binder, 'finishDate')}
+        onChange={this.onChange.bind(binder, "finishDate")}
         className="form-control"
         data-date-format="mm/dd/yyyy"
         type="date"

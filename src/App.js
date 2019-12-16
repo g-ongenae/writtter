@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
+import Config from "./Config";
 import Connect from "./components/Connect";
 import CreateView from "./components/creates/CreateView";
 import SearchPage from "./components/SearchPage";
@@ -31,23 +32,23 @@ export default class App extends Component {
           <Menu></Menu>
 
           <Switch>
-            <Route path="/create">
+            <Route path={Config.getUrl('/create')}>
               <CreateView />
             </Route>
-            <Route path="/search">
+            <Route path={Config.getUrl('/search')}>
               <SearchPage />
             </Route>
-            <Route path="/profile">
+            <Route path={Config.getUrl('/profile')}>
               <UserPage userId={this.state.userId} />
             </Route>
 
-            <Route path="/user">
+            <Route path={Config.getUrl('/user')}>
               <UserPage />
             </Route>
-            <Route path="/login">
+            <Route path={Config.getUrl('/login')}>
               <Connect />
             </Route>
-            <Route path="/register">
+            <Route path={Config.getUrl('/register')}>
               <CreateUser />
             </Route>
             <Route path="/stories/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />

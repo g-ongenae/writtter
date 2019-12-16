@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 
-const API_BASE_URL = "https://writtter.herokuapp.com";
+import Config from "../../Config";
 
 export default class RuleChoices extends Component {
-  constructor() {
+  constructor(props) {
     super();
-
     this.state = {
       rules: [],
       isLoading: false
@@ -16,7 +15,7 @@ export default class RuleChoices extends Component {
     this.setState({ isLoading: true });
 
     try {
-      const response = await fetch(`${API_BASE_URL}/rules`);
+      const response = await fetch(Config.getApi("/rules"));
 
       if (!response.ok) {
         throw new Error("Could not fetch tags");

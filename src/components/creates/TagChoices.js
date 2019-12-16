@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-const API_BASE_URL = "https://writtter.herokuapp.com";
+import Config from "../../Config";
 
 export default class TagChoices extends Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
@@ -16,7 +16,7 @@ export default class TagChoices extends Component {
     this.setState({ isLoading: true });
 
     try {
-      const response = await fetch(`${API_BASE_URL}/tags`);
+      const response = await fetch(Config.getApi("/tags"));
 
       if (!response.ok) {
         throw new Error("Could not fetch tags");

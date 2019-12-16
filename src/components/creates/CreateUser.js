@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const API_BASE_URL = "https://writtter.herokuapp.com";
+import Config from "../../Config";
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class CreateUser extends Component {
 
     console.log("Event", event);
     // Send data to the server
-    const response = await fetch(`${API_BASE_URL}/users`, {
+    const response = await fetch(Config.getApi("/users"), {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -43,7 +43,7 @@ export default class CreateUser extends Component {
     console.log("response", response);
 
     // Redirect
-    // window.location.href = "/";
+    window.location.href = Config.getUrl("/");
   }
 
   render() {

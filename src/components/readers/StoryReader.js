@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const API_BASE_URL = "https://writtter.herokuapp.com";
+import Config from "../../Config";
 
 export default class StoryReader extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class StoryReader extends Component {
     this.setState({ isLoading: true });
 
     try {
-      const response = await fetch(`${API_BASE_URL}/stories/${this.storyId}`);
+      const response = await fetch(Config.getApi(`/stories/${this.storyId}`));
       if (!response.ok) {
         throw new Error("Something went wrong ...");
       }

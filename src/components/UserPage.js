@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
+import Config from "../Config";
+
 export default class UserPage extends Component {
   constructor() {
     super();
@@ -17,29 +19,32 @@ export default class UserPage extends Component {
             {/* Username: {username = "Guillaume"} */}
             {/* <img> {userimage = "hello"} </img> */}
           </div>
-          <Link to="/user/:userId/stories"> Stories </Link>
-          <Link to="/user/:userId/competitions"> Competitions </Link>
-          <Link to="/user/:userId/likes"> Likes </Link>
-          <Link to="/user/:userId/comments"> Comments </Link>
+          <Link to={Config.getUrl("/user/:userId/stories")}> Stories </Link>
+          <Link to={Config.getUrl("/user/:userId/competitions")}>
+            {" "}
+            Competitions{" "}
+          </Link>
+          <Link to={Config.getUrl("/user/:userId/likes")}> Likes </Link>
+          <Link to={Config.getUrl("/user/:userId/comments")}> Comments </Link>
 
           <Switch>
-            <Route path="/user/:userId/stories">
+            <Route path={Config.getUrl("/user/:userId/stories")}>
               {" "}
               <Stories liked={false} />{" "}
             </Route>
-            <Route path="/user/:userId/competitions">
+            <Route path={Config.getUrl("/user/:userId/competitions")}>
               {" "}
               <Competitions />{" "}
             </Route>
-            <Route path="/user/:userId/likes">
+            <Route path={Config.getUrl("/user/:userId/likes")}>
               {" "}
               <Stories liked={true} />{" "}
             </Route>
-            <Route path="/user/:userId/comments">
+            <Route path={Config.getUrl("/user/:userId/comments")}>
               {" "}
               <Comments />{" "}
             </Route>
-            <Route path="/user/:userId">
+            <Route path={Config.getUrl("/user/:userId")}>
               {" "}
               <Stories liked={false} />{" "}
             </Route>
