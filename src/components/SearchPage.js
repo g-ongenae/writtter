@@ -17,14 +17,14 @@ export default class SearchPage extends Component {
 
 function SearchBar() {
   return (
-    <div class="container">
+    <div className="container">
       <h1> Search Page </h1>
-      <form class="form-row">
-        <div class="col-sm-2"></div>
-        <fieldset class="col-sm-7 form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
+      <form className="form-row">
+        <div className="col-sm-2"></div>
+        <fieldset className="col-sm-7 form-group">
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <div className="input-group-text">
                 <Octicon icon={Search} />
               </div>
             </div>
@@ -32,13 +32,13 @@ function SearchBar() {
               id="search"
               type="search"
               name="search"
-              class="form-control"
+              className="form-control"
               required
             />
           </div>
         </fieldset>
-        <fieldset class="col-sm-2 form-group">
-          <input type="submit" value="Search" class="btn btn-primary" />
+        <fieldset className="col-sm-2 form-group">
+          <input type="submit" value="Search" className="btn btn-primary" />
         </fieldset>
       </form>
     </div>
@@ -60,17 +60,17 @@ function SearchResults({ results }) {
   const items = results.map((item, index) => (
     <SearchResultItem index={index} item={item} />
   ));
-  return <div class="container">{items}</div>;
+  return <div className="container">{items}</div>;
 }
 
 function SearchResultItem({ item, index }) {
   return (
-    <div class="panel panel-default">
-      <div class="panel-heading">
+    <div className="panel panel-default">
+      <div className="panel-heading">
         {item.name} — by {item.ownerId} — {item.lastEditedAt}
       </div>
-      <div class="panel-body">{item.description}</div>
-      <div class="panel-footer">
+      <div className="panel-body">{item.description}</div>
+      <div className="panel-footer">
         <Link to={`/stories/${item.id}`}>Read the story</Link>
         <Link to={`/stories/${item.id}/edit`}>Edit the story</Link>
       </div>
@@ -80,8 +80,8 @@ function SearchResultItem({ item, index }) {
 
 function Centered({ text }) {
   return (
-    <div class="jumbotron d-flex align-items-center">
-      <div class="container text-center">
+    <div className="jumbotron d-flex align-items-center">
+      <div className="container text-center">
         <h2>{text}</h2>
       </div>
     </div>

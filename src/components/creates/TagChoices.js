@@ -35,7 +35,7 @@ export default class TagChoices extends Component {
     ));
 
     return (
-      <select name="tags" class="form-control" multiple>
+      <select name="tags" className="form-control" multiple>
         {tagsChoices}
       </select>
     );

@@ -5,39 +5,39 @@ import TagChoices from "./TagChoices";
 export default class CreateRule extends Component {
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>Create a new rule</h1>
 
         <form>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label for="title">Title:</label>
             <input
               id="title"
               type="text"
               name="title"
-              class="form-control"
+              className="form-control"
               placeholder="Enter title"
             />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label>Description:</label>
             <textarea
               name="description"
-              class="form-control"
+              className="form-control"
               placeholder="Write a description for your story"
               rows="3"
             />
           </fieldset>
-          <fieldset class="form-group">
-            <input class="form-check-input" type="checkbox" name="isPublic" />
-            <label class="form-check-label">Public Mode</label>
+          <fieldset className="form-group">
+            <input className="form-check-input" type="checkbox" name="isPublic" />
+            <label className="form-check-label">Public Mode</label>
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label>Tags:</label>
             <TagChoices userId={this.props.userId} />
           </fieldset>
-          <fieldset class="form-group text-center">
-            <input type="submit" value="Create rule" class="btn btn-primary" />
+          <fieldset className="form-group text-center">
+            <input type="submit" value="Create rule" className="btn btn-primary" />
           </fieldset>
         </form>
       </div>

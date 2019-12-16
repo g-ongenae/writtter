@@ -5,61 +5,74 @@ import TagChoices from "./TagChoices";
 import RuleChoices from "./RuleChoices";
 
 export default class CreateCompetition extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      name: "",
+      description: "",
+      finishDate: "",
+    }
+  }
+
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>Create a new competition</h1>
 
         <form>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label for="title">Title:</label>
             <input
-              id="title"
+              value={this.state.name}
+              onChange={this.onChange.bind(this, 'name')}
+              id="name"
               type="text"
-              name="title"
-              class="form-control"
+              name="name"
+              className="form-control"
               placeholder="Enter title"
             />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label>Description:</label>
             <textarea
+              value={this.state.description}
+              onChange={this.onChange.bind(this, 'description')}
               name="description"
-              class="form-control"
+              className="form-control"
               placeholder="Write a description for your story"
               rows="3"
             />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label>Due date:</label>
-            <DatePicker />
+            <DatePicker competition={this} />
           </fieldset>
-          <fieldset class="form-group">
-            <input class="form-check-input" type="checkbox" name="isPublic" />
-            <label class="form-check-label">Public Mode</label>
+          <fieldset className="form-group">
+            <input className="form-check-input" type="checkbox" name="isPublic" />
+            <label className="form-check-label">Public Mode</label>
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="checkbox"
               name="commentsEnabled"
               defaultChecked
             />
-            <label class="form-check-label">Comments enabled</label>
+            <label className="form-check-label">Comments enabled</label>
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label>Rules:</label>
-            <RuleChoices userId={this.props.userId} />
+            <RuleChoices userId={this.props.userId} binder={this} />
           </fieldset>
-          <fieldset class="form-group">
+          <fieldset className="form-group">
             <label>Tags:</label>
-            <TagChoices userId={this.props.userId} />
+            <TagChoices userId={this.props.userId} binder={this} />
           </fieldset>
-          <fieldset class="form-group text-center">
+          <fieldset className="form-group text-center">
             <input
               type="submit"
               value="Create competition"
-              class="btn btn-primary"
+              className="btn btn-primary"
             />
           </fieldset>
         </form>
@@ -68,20 +81,22 @@ export default class CreateCompetition extends Component {
   }
 }
 
-function DatePicker() {
+function DatePicker({ binder }) {
   const d = new Date();
   const min = `${d.getDate()}/${d.getMonth()}/${d.getUTCFullYear()}`;
 
   return (
-    <div class="input-group date">
+    <div className="input-group date">
       <input
-        class="form-control"
+        value={this.state.finishDate}
+        onChange={this.onChange.bind(binder, 'finishDate')}
+        className="form-control"
         data-date-format="mm/dd/yyyy"
         type="date"
         min={min}
       />
-      <span class="input-group-append">
-        <span class="input-group-text">
+      <span className="input-group-append">
+        <span className="input-group-text">
           <Octicon icon={Calendar} />
         </span>
       </span>

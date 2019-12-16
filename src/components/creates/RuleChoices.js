@@ -35,7 +35,7 @@ export default class RuleChoices extends Component {
     ));
 
     return (
-      <select name="rules" class="form-control" multiple>
+      <select name="rules" className="form-control" multiple>
         {rulesChoices}
       </select>
     );

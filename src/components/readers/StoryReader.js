@@ -44,12 +44,12 @@ export default class StoryReader extends Component {
     }
 
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
             {story.name} — by {story.ownerId} — {story.lastEditedAt}
           </div>
-          <div class="panel-body">{story.content}</div>
+          <div className="panel-body">{story.content}</div>
         </div>
       </div>
     );
