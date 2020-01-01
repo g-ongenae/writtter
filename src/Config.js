@@ -1,6 +1,6 @@
 
 export class Config {
-  constructor(local = true) {
+  constructor(local = false) {
     this.FRONT_BASE_URL = local ? "http://localhost:8080" : "http://g-ongeane.github.io/writtter"
     this.API_BASE_URL = local ? "http://localhost:5050" : "https://writtter.herokuapp.com";
   }
