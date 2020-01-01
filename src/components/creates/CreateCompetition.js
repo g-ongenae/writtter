@@ -14,6 +14,12 @@ export default class CreateCompetition extends Component {
     };
   }
 
+  handleChange(field, event) {
+    const obj = {};
+    obj[field] = event.target.value;
+    this.setState(obj);
+  }
+
   render() {
     return (
       <div className="container">
@@ -24,7 +30,7 @@ export default class CreateCompetition extends Component {
             <label for="title">Title:</label>
             <input
               value={this.state.name}
-              onChange={this.onChange.bind(this, "name")}
+              onChange={this.handleChange.bind(this, "name")}
               id="name"
               type="text"
               name="name"
@@ -36,7 +42,7 @@ export default class CreateCompetition extends Component {
             <label>Description:</label>
             <textarea
               value={this.state.description}
-              onChange={this.onChange.bind(this, "description")}
+              onChange={this.handleChange.bind(this, "description")}
               name="description"
               className="form-control"
               placeholder="Write a description for your story"
@@ -85,15 +91,15 @@ export default class CreateCompetition extends Component {
   }
 }
 
-function DatePicker({ binder }) {
+function DatePicker({competition}) {
   const d = new Date();
   const min = `${d.getDate()}/${d.getMonth()}/${d.getUTCFullYear()}`;
 
   return (
     <div className="input-group date">
       <input
-        value={this.state.finishDate}
-        onChange={binder.onChange.bind(binder, "finishDate")}
+        value={competition.state.finishDate}
+        onChange={competition.handleChange.bind(competition, "finishDate")}
         className="form-control"
         data-date-format="mm/dd/yyyy"
         type="date"
