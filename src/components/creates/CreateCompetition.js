@@ -93,7 +93,7 @@ function DatePicker({ binder }) {
     <div className="input-group date">
       <input
         value={this.state.finishDate}
-        onChange={this.onChange.bind(binder, "finishDate")}
+        onChange={binder.onChange.bind(binder, "finishDate")}
         className="form-control"
         data-date-format="mm/dd/yyyy"
         type="date"
