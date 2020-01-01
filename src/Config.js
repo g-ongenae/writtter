@@ -1,8 +1,8 @@
 
 export class Config {
-  constructor(local = false) {
-    this.FRONT_BASE_URL = local ? "http://localhost:8080" : "http://g-ongeane.github.io/writtter"
-    this.API_BASE_URL = local ? "http://localhost:5050" : "https://writtter.herokuapp.com";
+  constructor(local = process.env.NODE_ENV) {
+    this.FRONT_BASE_URL = local === "development" ? "" : "/writtter"; // http://localhost:8080 ; http://g-ongeane.github.io
+    this.API_BASE_URL = local === "development" ? "http://localhost:5050" : "https://writtter.herokuapp.com";
   }
 
   /**
