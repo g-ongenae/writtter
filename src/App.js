@@ -29,7 +29,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Menu></Menu>
+          <Menu />
 
           <Switch>
             <Route path={Config.getUrl('/create')}>
@@ -41,7 +41,6 @@ export default class App extends Component {
             <Route path={Config.getUrl('/profile')}>
               <UserPage userId={this.state.userId} />
             </Route>
-
             <Route path={Config.getUrl('/user')}>
               <UserPage />
             </Route>
@@ -52,9 +51,21 @@ export default class App extends Component {
               <CreateUser />
             </Route>
             <Route path="/stories/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
+            <Route exact path="/" component={Header} />
           </Switch>
         </Router>
       </div>
     );
   }
+}
+
+function Header(params) {
+  return (
+    <header className="App-header">
+      {/* <img src={logo} className="App-logo" alt="logo" /> */}
+      <h1>Writtter</h1>
+      <h4>The place to play with words and stories, together.</h4>
+      <p>Coming Soon</p>
+    </header>
+  );
 }
