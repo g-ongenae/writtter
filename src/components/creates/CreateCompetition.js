@@ -27,7 +27,7 @@ export default class CreateCompetition extends Component {
 
         <form>
           <fieldset className="form-group">
-            <label for="title">Title:</label>
+            <label htmlFor="title">Title:</label>
             <input
               value={this.state.name}
               onChange={this.handleChange.bind(this, "name")}

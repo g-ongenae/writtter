@@ -9,20 +9,15 @@ import SearchPage from "./components/SearchPage";
 import Menu from "./components/Menu";
 import UserPage from "./components/UserPage";
 import CreateUser from "./components/creates/CreateUser";
-import StoryReader from "./components/readers/StoryReader"
+import StoryReader from "./components/readers/StoryReader";
+import HomePage from "./components/HomePage";
 
 export default class App extends Component {
   constructor(props) {
     super();
-    this.state = {};
-  }
-
-  componentDidMount() {
-    fetch("URL")
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({});
-      });
+    this.state = {
+      userId: '',
+    };
   }
 
   render() {
@@ -32,26 +27,17 @@ export default class App extends Component {
           <Menu />
 
           <Switch>
-            <Route path={Config.getUrl('/create')}>
-              <CreateView />
-            </Route>
-            <Route path={Config.getUrl('/search')}>
-              <SearchPage />
-            </Route>
+            <Route path={Config.getUrl("/about")} component={AboutView} />
+            <Route path={Config.getUrl('/create')} component={CreateView} />
+            <Route path={Config.getUrl('/search')} component={SearchPage} />
             <Route path={Config.getUrl('/profile')}>
               <UserPage userId={this.state.userId} />
             </Route>
-            <Route path={Config.getUrl('/user')}>
-              <UserPage />
-            </Route>
-            <Route path={Config.getUrl('/login')}>
-              <Connect />
-            </Route>
-            <Route path={Config.getUrl('/register')}>
-              <CreateUser />
-            </Route>
+            <Route path={Config.getUrl('/user')} component={UserPage} />
+            <Route path={Config.getUrl('/login')} component={Connect} />
+            <Route path={Config.getUrl('/register')} component={CreateUser} />
             <Route path="/stories/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
-            <Route exact path="/" component={Header} />
+            <Route exact path="/" component={HomePage} />
           </Switch>
         </Router>
       </div>
@@ -59,13 +45,14 @@ export default class App extends Component {
   }
 }
 
-function Header(params) {
+function AboutView(params) {
   return (
-    <header className="App-header">
-      {/* <img src={logo} className="App-logo" alt="logo" /> */}
+    <section className="App-section">
       <h1>Writtter</h1>
       <h4>The place to play with words and stories, together.</h4>
-      <p>Coming Soon</p>
-    </header>
+      <p>
+        Created by <a href="https://g-ongenae.github.io/">Guillaume Ongenae</a>
+      </p>
+    </section>
   );
 }

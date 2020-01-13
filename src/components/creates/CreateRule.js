@@ -10,7 +10,7 @@ export default class CreateRule extends Component {
 
         <form>
           <fieldset className="form-group">
-            <label for="title">Title:</label>
+            <label htmlFor="title">Title:</label>
             <input
               id="title"
               type="text"
