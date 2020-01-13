@@ -4,9 +4,9 @@ export default class Stories extends Component {
   constructor(props) {
     super(props);
 
-    console.log('Hello');
+    console.log("Hello");
   }
   render() {
-    return(<h1>Hello here are the stories</h1>);
+    return <h1>Hello here are the stories</h1>;
   }
 }

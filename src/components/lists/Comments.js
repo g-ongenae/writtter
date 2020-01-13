@@ -4,11 +4,10 @@ export default class Comments extends Component {
   constructor(props) {
     super(props);
 
-    console.log('Hello');
+    console.log("Hello");
   }
 
-
   render() {
-    return(<h1>Hello here are the comments</h1>);
+    return <h1>Hello here are the comments</h1>;
   }
 }

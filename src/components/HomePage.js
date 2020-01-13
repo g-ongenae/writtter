@@ -3,14 +3,10 @@ import React, { Component } from "react";
 export default class HomePage extends Component {
   constructor(params) {
     super(params);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -22,4 +18,4 @@ export default class HomePage extends Component {
       </section>
     );
   }
-};
+}

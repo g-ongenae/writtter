@@ -11,7 +11,7 @@ export default class UserPage extends Component {
     super();
     this.state = {
       isLoading: false,
-      userId: 0,
+      userId: 0
     };
   }
 
@@ -23,10 +23,18 @@ export default class UserPage extends Component {
             {/* Username: {username = "Guillaume"} */}
             {/* <img> {userimage = "hello"} </img> */}
           </div>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/stories`)}>Stories</Link>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/competitions`)}>Competitions</Link>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/likes`)}>Likes</Link>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/comments`)}>Comments</Link>
+          <Link to={Config.getUrl(`/user/${this.state.userId}/stories`)}>
+            Stories
+          </Link>
+          <Link to={Config.getUrl(`/user/${this.state.userId}/competitions`)}>
+            Competitions
+          </Link>
+          <Link to={Config.getUrl(`/user/${this.state.userId}/likes`)}>
+            Likes
+          </Link>
+          <Link to={Config.getUrl(`/user/${this.state.userId}/comments`)}>
+            Comments
+          </Link>
 
           <Switch>
             <Route path={Config.getUrl("/user/:userId/stories")}>

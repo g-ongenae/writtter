@@ -91,7 +91,7 @@ export default class CreateCompetition extends Component {
   }
 }
 
-function DatePicker({competition}) {
+function DatePicker({ competition }) {
   const d = new Date();
   const min = `${d.getDate()}/${d.getMonth()}/${d.getUTCFullYear()}`;
 

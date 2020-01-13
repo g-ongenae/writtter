@@ -31,12 +31,13 @@ export default function CreateView(props) {
 
 /**
  * @todo fix button not changing color when clicked (use onClick event)
- * @param {string} activeViewName 
+ * @param {string} activeViewName
  */
 function Menu({ activeViewName }) {
   const active = "btn btn-lg btn-block btn-outline-primary";
   const inactive = "btn btn-lg btn-block btn-primary";
-  const macro = (propName) => `/create/${propName}` === activeViewName ? active : inactive;
+  const macro = propName =>
+    `/create/${propName}` === activeViewName ? active : inactive;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light rounded">
@@ -44,17 +45,26 @@ function Menu({ activeViewName }) {
         <ul className="navbar-nav">
           <li className="nav-item active">
             <Link className="nav-link" to={Config.getUrl("/create/story")}>
-              <button type="button" className={macro("story")}>Story</button>
+              <button type="button" className={macro("story")}>
+                Story
+              </button>
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={Config.getUrl("/create/competition")}> 
-              <button type="button" className={macro("competition")}>Competition</button>
+            <Link
+              className="nav-link"
+              to={Config.getUrl("/create/competition")}
+            >
+              <button type="button" className={macro("competition")}>
+                Competition
+              </button>
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={Config.getUrl("/create/rule")}> 
-              <button type="button" className={macro("rule")}>Rule</button>
+            <Link className="nav-link" to={Config.getUrl("/create/rule")}>
+              <button type="button" className={macro("rule")}>
+                Rule
+              </button>
             </Link>
           </li>
         </ul>
