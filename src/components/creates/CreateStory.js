@@ -1,9 +1,57 @@
 import React, { Component } from "react";
 
+import Config from "../../Config";
 import TagChoices from "./TagChoices";
 import RuleChoices from "./RuleChoices";
 
 export default class CreateStory extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      isPublic: false,
+      isCommentsDisabled: false,
+      description: '',
+      ownerId: 1 // TODO fix me
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(field, event) {
+    const obj = {};
+    obj[field] = event.target.value;
+    this.setState(obj);
+  }
+
+  async handleSubmit(event) {
+    // Prevent from refreshing
+    event.preventDefault();
+
+    console.log("Event", event);
+    // Send data to the server
+    const response = await fetch(Config.getApi("/stories"), {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ownerId: this.state.ownerId,
+        name: this.state.name,
+        description: this.state.description,
+        isPublic: this.state.isPublic,
+        isCommentsDisabled: !this.state.isCommentsDisabled,
+      })
+    });
+
+    console.log("response", response);
+
+    // Redirect
+    window.location.href = Config.getUrl("/");
+  }
+
   render() {
     return (
       <div className="container">
@@ -18,6 +66,8 @@ export default class CreateStory extends Component {
               name="title"
               className="form-control"
               placeholder="Enter title"
+              value={this.state.name}
+              onChange={this.handleChange.bind(this, "name")}
             />
           </fieldset>
           <fieldset className="form-group">
@@ -27,6 +77,8 @@ export default class CreateStory extends Component {
               className="form-control"
               placeholder="Write a description for your story"
               rows="3"
+              value={this.state.description}
+              onChange={this.handleChange.bind(this, "description")}
             />
           </fieldset>
           <fieldset className="form-group">
@@ -34,6 +86,8 @@ export default class CreateStory extends Component {
               className="form-check-input"
               type="checkbox"
               name="isPublic"
+              value={this.state.isPublic}
+              onChange={this.handleChange.bind(this, "isPublic")}
             />
             <label className="form-check-label">Public Mode</label>
           </fieldset>
@@ -43,6 +97,8 @@ export default class CreateStory extends Component {
               type="checkbox"
               name="commentsEnabled"
               defaultChecked
+              value={this.state.isCommentsDisabled}
+              onChange={this.handleChange.bind(this, "isCommentsDisabled")}
             />
             <label className="form-check-label">Comments enabled</label>
           </fieldset>
