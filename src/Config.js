@@ -2,7 +2,7 @@
 export class Config {
   constructor(local = process.env.NODE_ENV) {
     this.FRONT_BASE_URL = local === "development" ? "" : "/writtter";
-    this.API_BASE_URL = local === "development" ? "http://localhost:5050" : "https://writtter.herokuapp.com";
+    this.API_BASE_URL = "https://writtter.herokuapp.com"; // local === "development" ? "http://localhost:5050" :
   }
 
   /**

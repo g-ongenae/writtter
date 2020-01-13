@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import Config from "../../Config";
 
@@ -15,16 +16,24 @@ export default class StoryReader extends Component {
 
   async componentWillMount() {
     this.setState({ isLoading: true });
-
     try {
-      const response = await fetch(Config.getApi(`/stories/${this.storyId}`));
+      const response = await fetch(Config.getApi(`/stories/${this.state.storyId}`));
       if (!response.ok) {
-        throw new Error("Something went wrong ...");
+        throw new Error("Something went wrong...");
       }
       const data = await response.json();
-      this.setState({ story: data.story, isLoading: false });
+      if (!Array.isArray(data) || data.length === 0) {
+        this.setState({ error: { message: "Not found" }, isLoading: false });
+        this._isMounted = true;
+        return;
+      }
+
+      this.setState({ story: data[0], isLoading: false });
+      this._isMounted = true;
+      return;
     } catch (error) {
       this.setState({ error, isLoading: false });
+      this._isMounted = true;
     }
   }
 
@@ -36,22 +45,32 @@ export default class StoryReader extends Component {
     const { story, isLoading, error } = this.state;
 
     if (error) {
-      return <p>{error.message}</p>;
+      return <p>An error occurred, sorry: {error.message}</p>;
     }
 
     if (isLoading || !story) {
       return <div> Loading story </div>;
     }
 
+    const date = new Date(story.lastEditedAt || story.createdAt);
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            {story.name} — by {story.ownerId} — {story.lastEditedAt}
+      <Router>
+        <div className="container">
+          <div className="card panel-default">
+            <div className="card-header text-center">
+              <b>{story.name}</b> — by <Link to={`/user/${story.ownerId}=`}>{story.ownerId}</Link> — {date.toDateString()}
+            </div>
+            <div className="card-body">{story.content || "No content for now"}</div>
+            <div className="card-footer">
+              <Link to={`/stories/${story.id}/edit`}>
+                <button type="button" className="btn btn-lg btn-block btn-primary">
+                  Edit the story
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className="panel-body">{story.content}</div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
