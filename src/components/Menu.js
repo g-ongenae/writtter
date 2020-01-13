@@ -4,15 +4,33 @@ import { Link } from "react-router-dom";
 import Config from "../Config";
 
 export default function Menu({ loggedIn }) {
+  const logButtons = [];
+  // TODO simplify
+  if (!loggedIn) {
+    logButtons.push(<li className="nav-item">
+      <Link className="nav-link" to={Config.getUrl("/login")}> Log in </Link>
+    </li>);
+    logButtons.push(<li className="nav-item">
+      <Link className="nav-link" to={Config.getUrl("/register")}> Register </Link>
+    </li>);
+  } else {
+    logButtons.push(<li className="nav-item">
+      <Link className="nav-link" to={Config.getUrl("/profile")}> Profile </Link>
+    </li>);
+    logButtons.push(<li className="nav-item">
+      <Link className="nav-link" to={Config.getUrl("/logout")}> Log out </Link>
+    </li>);
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to={Config.getUrl("/")}> Writtter </Link>
+      {/* TODO fix me 
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
-      </button>
+      </button> */}
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <div className="collapse navbar-collapse show" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/about")}> About </Link>
@@ -23,7 +41,8 @@ export default function Menu({ loggedIn }) {
           <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/create")}> Create </Link>
           </li>
-          <LogButtons loggedIn={loggedIn}/>
+          {logButtons[0]}
+          {logButtons[1]}
         </ul>
         <form className="form-inline my-2 my-lg-0">
           <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
@@ -31,33 +50,5 @@ export default function Menu({ loggedIn }) {
         </form>
       </div>
     </nav>
-  );
-}
-
-function LogButtons({loggedIn}) {
-  let logButtons;
-  if (!loggedIn) {
-    logButtons = (
-      <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-        <Link className="dropdown-item" to={Config.getUrl("/login")}> Log in </Link>
-        <Link className="dropdown-item" to={Config.getUrl("/register")}> Register </Link>
-      </div>
-    );
-  } else {
-    logButtons = (
-      <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-        <Link className="dropdown-item" to={Config.getUrl("/profile")}> Profile </Link>
-        <Link className="dropdown-item" to={Config.getUrl("/logout")}> Log out </Link>
-      </div>
-    );
-  }
-
-  return (
-    <li className="nav-item dropdown">
-      <button className="nav-link btn btn-secondary dropdown-toggle" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Log
-      </button>
-      {logButtons}
-    </li>
   );
 }
