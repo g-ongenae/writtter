@@ -10,16 +10,14 @@ export default function Menu({ loggedIn }) {
     logButtons.push(
       <li className="nav-item">
         <Link className="nav-link" to={Config.getUrl("/login")}>
-          {" "}
-          Log in{" "}
+          Log in
         </Link>
       </li>
     );
     logButtons.push(
       <li className="nav-item">
         <Link className="nav-link" to={Config.getUrl("/register")}>
-          {" "}
-          Register{" "}
+          Register
         </Link>
       </li>
     );
@@ -27,16 +25,14 @@ export default function Menu({ loggedIn }) {
     logButtons.push(
       <li className="nav-item">
         <Link className="nav-link" to={Config.getUrl("/profile")}>
-          {" "}
-          Profile{" "}
+          Profile
         </Link>
       </li>
     );
     logButtons.push(
       <li className="nav-item">
         <Link className="nav-link" to={Config.getUrl("/logout")}>
-          {" "}
-          Log out{" "}
+          Log out
         </Link>
       </li>
     );
@@ -60,20 +56,17 @@ export default function Menu({ loggedIn }) {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/about")}>
-              {" "}
-              About{" "}
+              About
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/search")}>
-              {" "}
-              Search{" "}
+              Search
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/create")}>
-              {" "}
-              Create{" "}
+              Create
             </Link>
           </li>
           {logButtons[0]}
