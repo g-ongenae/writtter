@@ -1,4 +1,5 @@
 const Boom = require("boom");
+// const bcrypt = require("bcrypt");
 const Router = require("koa-router");
 
 const User = require("../models/User");
@@ -86,12 +87,16 @@ class UserRouter {
   }
 
   async _login(ctx) {
-    console.debug(
-      "User logged in",
-      ctx.request.params,
-      ctx.request.query,
-      ctx.request.body
-    );
+    console.info("Login in");
+    const user = new User();
+    const data = await user.findByUsername(ctx.req.header.username);
+
+    if (data.password === ctx.req.header.password) {
+      const token = user.generateAuthToken();
+      console.log(token);
+    } else {
+      throw Boom.badRequest("Invalid Password");
+    }
   }
 
   async _logout(ctx) {
