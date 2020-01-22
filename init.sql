@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) NOT NULL,
     joinedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password CHAR(60) NOT NULL,
     active BOOLEAN DEFAULT TRUE,
     score INT DEFAULT 0,
     UNIQUE KEY(username),

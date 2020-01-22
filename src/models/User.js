@@ -34,7 +34,7 @@ module.exports = class User {
   async save(values) {
     // Convert password
     if (_.has(values, "password")) {
-      values.password = await bcrypt.hash(values.password, "sha512");
+      values.password = await bcrypt.hash(values.password, 10);
     }
 
     // Save
@@ -93,7 +93,11 @@ module.exports = class User {
   }
 
   async findByUsername(value) {
-    return db.query(sql`SELECT * FROM users WHERE username = ${value}`);
+    const res = db.query(sql`SELECT * FROM users WHERE username = ${value}`);
+    console.log("Result", res);
+    this._id = res.insertId;
+
+    return res;
   }
 
   /**
