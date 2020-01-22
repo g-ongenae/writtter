@@ -12,8 +12,7 @@ server
   .start(Config.PORT)
   .then(async () => {
     // Init only for test or manually
-    // TODO remove the check on PORT, will always evaluate to true
-    if (process.env.NODE_ENV !== "production" || process.env.PORT) {
+    if (process.env.NODE_ENV !== "production") {
       await initDB();
     }
 
