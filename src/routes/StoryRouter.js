@@ -33,7 +33,7 @@ class StoryRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = story.getData();
+    ctx.body = await story.getData();
 
     return;
   }
@@ -46,6 +46,8 @@ class StoryRouter {
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = await story.getData();
+
+    return;
   }
 
   async _get(ctx) {
@@ -61,6 +63,8 @@ class StoryRouter {
       ctx.message = "OK — Story found";
       ctx.status = 200;
       ctx.body = storyData;
+
+      return;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
@@ -78,17 +82,23 @@ class StoryRouter {
 
     ctx.message = "OK — Story deleted from database";
     ctx.status = 200;
-    ctx.body = storyId;
+    ctx.body = { storyId };
+
+    return;
   }
 
   async _search(ctx) {
     const story = new Story();
     ctx.body = await story.search(ctx.request.query);
+
+    return;
   }
 
   async _getByOwnerId(ctx) {
     const story = new Story();
     ctx.body = await story.getAllStoriesByOwner(ctx.params.id);
+
+    return;
   }
 }
 

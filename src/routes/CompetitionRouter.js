@@ -33,7 +33,9 @@ class CompetitionRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = competition.getId();
+    ctx.body = await competition.getId();
+
+    return;
   }
 
   async _put(ctx) {
@@ -44,6 +46,8 @@ class CompetitionRouter {
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = await competition.getData();
+
+    return;
   }
 
   async _get(ctx) {
@@ -59,6 +63,8 @@ class CompetitionRouter {
       ctx.message = "OK — Competition found";
       ctx.status = 200;
       ctx.body = competitionData;
+
+      return;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
@@ -71,22 +77,28 @@ class CompetitionRouter {
   async _delete(ctx) {
     const competition = new Competition(ctx.params.id);
 
-    const competitionId = competition.getId();
+    const competitionId = await competition.getId();
     await competition.remove();
 
     ctx.message = "OK — Competition deleted from database";
     ctx.status = 200;
-    ctx.body = competitionId;
+    ctx.body = { competitionId };
+
+    return;
   }
 
   async _search(ctx) {
     const competition = new Competition();
     ctx.body = await competition.search(ctx.request.query);
+
+    return;
   }
 
   async _getByCreatorId(ctx) {
     const competition = new Competition();
     ctx.body = await competition.getAllCompetitionsByCreator(ctx.params.id);
+
+    return;
   }
 }
 

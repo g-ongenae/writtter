@@ -33,7 +33,9 @@ class RuleRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = rule.getId();
+    ctx.body = await rule.getId();
+
+    return;
   }
 
   async _put(ctx) {
@@ -44,6 +46,8 @@ class RuleRouter {
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = await rule.getData();
+
+    return;
   }
 
   async _get(ctx) {
@@ -59,6 +63,8 @@ class RuleRouter {
       ctx.message = "OK — Rule found";
       ctx.status = 200;
       ctx.body = ruleData;
+
+      return;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
@@ -71,22 +77,28 @@ class RuleRouter {
   async _delete(ctx) {
     const rule = new Rule(ctx.params.id);
 
-    const ruleId = rule.getId();
+    const ruleId = await rule.getId();
     await rule.remove();
 
     ctx.message = "OK — Rule deleted from database";
     ctx.status = 200;
-    ctx.body = ruleId;
+    ctx.body = { ruleId };
+
+    return;
   }
 
   async _search(ctx) {
     const rule = new Rule();
     ctx.body = await rule.search(ctx.request.query);
+
+    return;
   }
 
   async _getByOwnerId(ctx) {
     const rule = new Rule();
     ctx.body = await rule.getAllRulesOwnedByAUser(ctx.params.id);
+
+    return;
   }
 }
 

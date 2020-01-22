@@ -51,6 +51,8 @@ class UserRouter {
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = await user.getData();
+
+    return;
   }
 
   async _get(ctx) {
@@ -66,6 +68,8 @@ class UserRouter {
       ctx.message = "OK — User found";
       ctx.status = 200;
       ctx.body = userData;
+
+      return;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
@@ -83,12 +87,16 @@ class UserRouter {
 
     ctx.message = "OK — User delete from database";
     ctx.status = 200;
-    ctx.body = userId;
+    ctx.body = { userId };
+
+    return;
   }
 
   async _search(ctx) {
     const user = new User();
     ctx.body = await user.search(ctx.request.query);
+
+    return;
   }
 
   async _login(ctx) {

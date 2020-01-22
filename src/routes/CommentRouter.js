@@ -34,7 +34,9 @@ class CommentRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = comment.getId();
+    ctx.body = await comment.getId();
+
+    return;
   }
 
   async _put(ctx) {
@@ -45,6 +47,8 @@ class CommentRouter {
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = await comment.getData();
+
+    return;
   }
 
   async _get(ctx) {
@@ -60,6 +64,8 @@ class CommentRouter {
       ctx.message = "OK — Comment found";
       ctx.status = 200;
       ctx.body = commentData;
+
+      return;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
@@ -72,27 +78,35 @@ class CommentRouter {
   async _delete(ctx) {
     const comment = new Comment(ctx.params.id);
 
-    const commentId = comment.getId();
+    const commentId = await comment.getId();
     await comment.remove();
 
     ctx.message = "OK — Comment deleted from database";
     ctx.status = 200;
-    ctx.body = commentId;
+    ctx.body = { commentId };
+
+    return;
   }
 
   async _search(ctx) {
     const comment = new Comment();
     ctx.body = await comment.search(ctx.request.query);
+
+    return;
   }
 
   async _getByOwnerId(ctx) {
     const comment = new Comment();
     ctx.body = await comment.getAllCommentsOwnedByAUser(ctx.params.id);
+
+    return;
   }
 
   async _getByStoryId(ctx) {
     const comment = new Comment();
     ctx.body = await comment.getAllCommentsRelatedToAStory(ctx.params.id);
+
+    return;
   }
 }
 

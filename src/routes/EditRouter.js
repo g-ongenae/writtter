@@ -33,7 +33,9 @@ class EditRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = edit.getId();
+    ctx.body = await edit.getId();
+
+    return;
   }
 
   async _put(ctx) {
@@ -44,6 +46,8 @@ class EditRouter {
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = await edit.getData();
+
+    return;
   }
 
   async _get(ctx) {
@@ -59,6 +63,8 @@ class EditRouter {
       ctx.message = "OK — Edit found";
       ctx.status = 200;
       ctx.body = editData;
+
+      return;
     } catch (error) {
       if (error.message == "No id") {
         throw Boom.badRequest();
@@ -71,22 +77,28 @@ class EditRouter {
   async _delete(ctx) {
     const edit = new Edit(ctx.params.id);
 
-    const editId = edit.getId();
+    const editId = await edit.getId();
     await edit.remove();
 
     ctx.message = "OK — Edit deleted from database";
     ctx.status = 200;
     ctx.body = editId;
+
+    return;
   }
 
   async _search(ctx) {
     const edit = new Edit();
     ctx.body = await edit.search(ctx.request.query);
+
+    return;
   }
 
   async _getByOwnerId(ctx) {
     const edit = new Edit();
     ctx.body = await edit.getAllEditsOwnedByAUser(ctx.params.id);
+
+    return;
   }
 }
 
