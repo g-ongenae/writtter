@@ -109,7 +109,7 @@ module.exports = class User {
       throw Boom.notFound(`User ${username} not found)`);
     }
 
-    this._id = _.get(res, "0.insertId");
+    this._id = _.get(res, "0.id");
     this.data = _.get(res, "0");
 
     return this.data;
@@ -120,7 +120,9 @@ module.exports = class User {
    * @returns {string} JSON Web Token
    */
   generateAuthToken() {
-    return jwt.sign({ _id: this._id }, Config.PRIVATE_KEY);
+    const data = { id: this._id };
+
+    return jwt.sign({ data }, Config.PRIVATE_KEY, { expiresIn: "1h" });
   }
 
   /**

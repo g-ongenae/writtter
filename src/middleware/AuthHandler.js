@@ -13,7 +13,6 @@ module.exports = async function validateAuth(ctx, next) {
   const token =
     ctx.request.headers["x-access-token"] ||
     ctx.request.headers["authorization"];
-  console.debug("Headers & Token", { headers: ctx.request.headers, token });
 
   // Pass to the next step anyway
   if (!token) {
@@ -25,7 +24,11 @@ module.exports = async function validateAuth(ctx, next) {
   try {
     // If can verify the token, set req.user and pass to next middleware
     ctx.request.user = jwt.verify(token, Config.PRIVATE_KEY);
-    console.info("Token checked");
+    console.info("Token checked", { user: ctx.request.user });
+
+    // Conserve the token in the response
+    ctx.set("x-access-token", token);
+    ctx.set("authorization", token);
 
     return next();
   } catch (err) {
