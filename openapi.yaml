@@ -49,3 +49,32 @@ paths:
               example: >-
                 See here for a complete example
                 https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/api-with-examples.yaml
+
+    /users:
+      post:
+        tags:
+          - User
+        summary: Create a new user
+        description: Create a new user
+        operationId: createUser
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                description: data of the user to create
+                properties:
+                  username:
+                    description: the name of the user on the platform
+                    type: string
+                  email:
+                    description: the email address of the user
+                    type: email
+                  password:
+                    description: the password of the user to connect to the platform
+                    type: password
+        responses:
+          "200":
+            description: The user has been successfully created.
+          "500":
+            description: Internal Server Error

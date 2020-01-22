@@ -35,7 +35,12 @@ class UserRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = user.getId();
+    ctx.body = {
+      message: "User saved successfully",
+      user: await user.getSafeData()
+    };
+
+    return;
   }
 
   async _put(ctx) {

@@ -25,12 +25,16 @@ module.exports = class User {
     this._id = id;
   }
 
-  async getId() {
+  getId() {
     return this._id;
   }
 
   async save(values) {
+    // TODO Convert password
     const res = await db.query(sql`INSERT INTO users ${spreadInsert(values)}`);
+    if (res.affectedRows === 0) {
+      throw new Error("No user saved");
+    }
     this._id = res.insertId;
 
     return this._id;
@@ -41,7 +45,18 @@ module.exports = class User {
       throw new Error("No id");
     }
 
-    return db.query(sql`SELECT * FROM users WHERE id = ${this._id}`);
+    const [res] = await db.query(
+      sql`SELECT * FROM users WHERE id = ${this._id}`
+    );
+
+    return res;
+  }
+
+  async getSafeData() {
+    const data = await this.getData();
+    data.password = undefined;
+
+    return data;
   }
 
   async remove() {
