@@ -1,3 +1,5 @@
+const _ = require("lodash");
+const bcrypt = require("bcrypt");
 const {
   defineTable,
   Schema,
@@ -30,20 +32,27 @@ module.exports = class User {
   }
 
   async save(values) {
-    // TODO Convert password
+    // Convert password
+    if (_.has(values, "password")) {
+      values.password = await bcrypt.hash(values.password, "sha512");
+    }
+
+    // Save
     const res = await db.query(sql`INSERT INTO users ${spreadInsert(values)}`);
+
+    // Check saved correctly
     if (res.affectedRows === 0) {
       throw new Error("No user saved");
     }
+
+    // Update user object
     this._id = res.insertId;
 
     return this._id;
   }
 
   async getData() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     const [res] = await db.query(
       sql`SELECT * FROM users WHERE id = ${this._id}`
@@ -60,17 +69,13 @@ module.exports = class User {
   }
 
   async remove() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     return db.query(sql`DELETE FROM users WHERE id = ${this._id}`);
   }
 
   async update(values) {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     const res = await db.query(sql`
       UPDATE users
@@ -97,5 +102,16 @@ module.exports = class User {
    */
   generateAuthToken() {
     return jwt.sign({ _id: this._id }, Config.PRIVATE_KEY);
+  }
+
+  /**
+   * Check _id exists in the class
+   * @private
+   * @throws
+   */
+  assertIdExists() {
+    if (_.isNil(this._id)) {
+      throw new Error("No id");
+    }
   }
 };

@@ -57,7 +57,7 @@ class UserRouter {
     const user = new User(ctx.params.id);
 
     try {
-      const userData = await user.getData();
+      const userData = await user.getSafeData();
 
       if (!userData) {
         throw Boom.notFound();
