@@ -29,11 +29,13 @@ class StoryRouter {
 
   async _post(ctx) {
     const story = new Story();
-    await story.save(ctx.request.body);
+    await story.save(ctx.request.body, ctx.request.user.data);
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = story.getId();
+    ctx.body = story.getData();
+
+    return;
   }
 
   async _put(ctx) {

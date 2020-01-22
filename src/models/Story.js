@@ -32,13 +32,15 @@ defineTable("stories", {
 module.exports = class Story {
   constructor(id) {
     this._id = id;
+    this.data = undefined;
   }
 
-  async getId() {
+  getId() {
     return this._id;
   }
 
-  async save(values) {
+  async save(values, userData) {
+    values.ownerId = values.ownerId || userData.id;
     const res = await db.query(
       sql`INSERT INTO stories ${spreadInsert(values)}`
     );
@@ -48,11 +50,21 @@ module.exports = class Story {
   }
 
   async getData() {
-    if (!this._id) {
-      throw new Error("No id");
+    this.assertIdExists();
+
+    if (!_.isNil(this.data)) {
+      return this.data;
     }
 
-    return db.query(sql`SELECT * FROM stories WHERE id = ${this._id}`);
+    const res = await db.query(
+      sql`SELECT * FROM stories WHERE id = ${this._id}`
+    );
+    if (_.isEmpty(res)) {
+      throw Boom.notFound(`Story ${this._id} not found)`);
+    }
+    this.data = res[0];
+
+    return this.data;
   }
 
   async getAllStoriesByOwner(ownerId) {
@@ -73,9 +85,7 @@ module.exports = class Story {
 
   async update(values, userId) {
     console.debug("Values to update", values);
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     const resGet = await db.query(
       sql`SELECT currentEditorId, semaphoreTakenAt FROM stories WHERE id = ${this._id}`
@@ -108,5 +118,16 @@ module.exports = class Story {
     return db.query(
       sql`SELECT id FROM stories WHERE name IS LIKE '%${value}%'`
     );
+  }
+
+  /**
+   * Check _id exists in the class
+   * @private
+   * @throws
+   */
+  assertIdExists() {
+    if (_.isNil(this._id)) {
+      throw new Error("No id");
+    }
   }
 };

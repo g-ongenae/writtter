@@ -61,13 +61,13 @@ module.exports = class User {
       return this.data;
     }
 
-    const [res] = await db.query(
-      sql`SELECT * FROM users WHERE id = ${this._id}`
-    );
+    const res = await db.query(sql`SELECT * FROM users WHERE id = ${this._id}`);
+    if (_.isEmpty(res)) {
+      throw Boom.notFound(`User ${this._id} not found)`);
+    }
+    this.data = res[0];
 
-    this.data = res;
-
-    return res;
+    return this.data;
   }
 
   async getSafeData() {
