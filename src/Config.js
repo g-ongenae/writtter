@@ -10,7 +10,7 @@ class Config {
     this.PASSWORD = this.get("PASSWORD");
     this.DATABASE = this.get("DATABASE", "writtter");
     this.PORT = this.get("PORT", 8080);
-    this.PRIVATE_KEY = this.get("PRIVATE_KEY");
+    this.PRIVATE_KEY = this.get("PRIVATE_KEY", "test_key");
   }
 
   /**

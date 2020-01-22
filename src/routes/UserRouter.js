@@ -1,5 +1,5 @@
+const _ = require("lodash");
 const Boom = require("boom");
-// const bcrypt = require("bcrypt");
 const Router = require("koa-router");
 
 const User = require("../models/User");
@@ -19,14 +19,14 @@ class UserRouter {
   }
 
   _routes() {
-    this.router.post("/", this._post);
-    this.router.get("/:id", this._get);
     this.router.delete("/:id", this._delete);
-    this.router.put("/:id", this._put);
-    this.router.patch("/:id", this._put);
-    this.router.get("/", this._search);
     this.router.get("/login", this._login);
     this.router.get("/logout", this._logout);
+    this.router.get("/:id", this._get);
+    this.router.get("/", this._search);
+    this.router.patch("/:id", this._put);
+    this.router.post("/", this._post);
+    this.router.put("/:id", this._put);
   }
 
   async _post(ctx) {
@@ -92,14 +92,19 @@ class UserRouter {
   }
 
   async _login(ctx) {
-    console.info("Login in");
     const user = new User();
-    const data = await user.findByUsername(ctx.req.header.username);
-
-    if (data.password === ctx.req.header.password) {
+    if (await user.checkPassword(_.get(ctx, "request.header"))) {
       const token = user.generateAuthToken();
-      console.log(token);
+
+      ctx.message = "OK";
+      ctx.status = 200;
+      ctx.set("authorization", token);
+      ctx.set("x-access-token", token);
+
+      return;
     } else {
+      console.log("Error invalid password");
+
       throw Boom.badRequest("Invalid Password");
     }
   }

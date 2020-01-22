@@ -11,8 +11,9 @@ const Config = require("../Config");
 module.exports = async function validateAuth(ctx, next) {
   // Get the token from the header if present
   const token =
-    ctx.req.headers["x-access-token"] || ctx.req.headers["authorization"];
-  console.debug("Headers & Token", { headers: ctx.req.headers, token });
+    ctx.request.headers["x-access-token"] ||
+    ctx.request.headers["authorization"];
+  console.debug("Headers & Token", { headers: ctx.request.headers, token });
 
   // Pass to the next step anyway
   if (!token) {
@@ -23,7 +24,7 @@ module.exports = async function validateAuth(ctx, next) {
 
   try {
     // If can verify the token, set req.user and pass to next middleware
-    ctx.req.user = jwt.verify(token, Config.PRIVATE_KEY);
+    ctx.request.user = jwt.verify(token, Config.PRIVATE_KEY);
     console.info("Token checked");
 
     return next();

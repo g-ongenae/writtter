@@ -1,5 +1,6 @@
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
+const Boom = require("boom");
 const {
   defineTable,
   Schema,
@@ -25,6 +26,7 @@ defineTable("users", {
 module.exports = class User {
   constructor(id) {
     this._id = id;
+    this.data = undefined;
   }
 
   getId() {
@@ -34,7 +36,7 @@ module.exports = class User {
   async save(values) {
     // Convert password
     if (_.has(values, "password")) {
-      values.password = await bcrypt.hash(values.password, 10);
+      values.password = await this.hashPassword(values.password);
     }
 
     // Save
@@ -47,6 +49,7 @@ module.exports = class User {
 
     // Update user object
     this._id = res.insertId;
+    this.data = values;
 
     return this._id;
   }
@@ -54,9 +57,15 @@ module.exports = class User {
   async getData() {
     this.assertIdExists();
 
+    if (!_.isNil(this.data)) {
+      return this.data;
+    }
+
     const [res] = await db.query(
       sql`SELECT * FROM users WHERE id = ${this._id}`
     );
+
+    this.data = res;
 
     return res;
   }
@@ -92,12 +101,18 @@ module.exports = class User {
     );
   }
 
-  async findByUsername(value) {
-    const res = db.query(sql`SELECT * FROM users WHERE username = ${value}`);
-    console.log("Result", res);
-    this._id = res.insertId;
+  async findByUsername(username) {
+    const res = await db.query(
+      sql`SELECT * FROM users WHERE username = ${username}`
+    );
+    if (_.isEmpty(res) || _.get(res, "0.affectedRows") === 0) {
+      throw Boom.notFound(`User ${username} not found)`);
+    }
 
-    return res;
+    this._id = _.get(res, "0.insertId");
+    this.data = _.get(res, "0");
+
+    return this.data;
   }
 
   /**
@@ -106,6 +121,33 @@ module.exports = class User {
    */
   generateAuthToken() {
     return jwt.sign({ _id: this._id }, Config.PRIVATE_KEY);
+  }
+
+  /**
+   * Check if the password is valid
+   * @param {{username: string, password: string}} credential the credential to connect
+   * @returns {boolean}
+   */
+  async checkPassword(credential) {
+    // Check if the credential are valid
+    if (!_.has(credential, "password") || !_.has(credential, "username")) {
+      throw Boom.badRequest("Invalid credentials");
+    }
+
+    // Retrieve the user data from database
+    await this.findByUsername(credential.username);
+
+    // Check the validity of the password
+    return bcrypt.compare(credential.password, this.data.password);
+  }
+
+  /**
+   * Hash a password to save it in the database
+   * @private
+   * @param {string} password
+   */
+  async hashPassword(password) {
+    return bcrypt.hash(password, 10);
   }
 
   /**
