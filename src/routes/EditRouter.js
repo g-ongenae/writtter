@@ -18,13 +18,13 @@ class EditRouter {
   }
 
   _routes() {
-    this.router.post("/", this._post);
-    this.router.get("/:id", this._get);
     this.router.delete("/:id", this._delete);
-    this.router.put("/:id", this._put);
-    this.router.patch("/:id", this._put);
-    this.router.get("/", this._search);
     this.router.get("/users/:id", this._getByOwnerId);
+    this.router.get("/:id", this._get);
+    this.router.get("/", this._search);
+    this.router.patch("/:id", this._put);
+    this.router.post("/", this._post);
+    this.router.put("/:id", this._put);
   }
 
   async _post(ctx) {
