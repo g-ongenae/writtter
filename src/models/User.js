@@ -49,7 +49,7 @@ module.exports = class User {
 
     // Update user object
     this._id = res.insertId;
-    this.data = values;
+    this.data = res.data;
 
     return this._id;
   }
