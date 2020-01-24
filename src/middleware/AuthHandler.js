@@ -14,6 +14,9 @@ module.exports = async function validateAuth(ctx, next) {
     ctx.request.headers["x-access-token"] ||
     ctx.request.headers["authorization"];
 
+  // Expose the headers to other endpoints (for the client)
+  ctx.set("Access-Control-Expose-Headers", "authorization, x-access-token");
+
   // Pass to the next step anyway
   if (!token) {
     console.info("No token provided.");
