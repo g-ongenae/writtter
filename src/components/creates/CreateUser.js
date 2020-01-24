@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Octicon, { Eye } from "@primer/octicons-react";
 
 import Config from "../../Config";
 
@@ -8,7 +9,9 @@ export default class CreateUser extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      data: null,
+      auth: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +28,6 @@ export default class CreateUser extends Component {
     // Prevent from refreshing
     event.preventDefault();
 
-    console.log("Event", event);
     // Send data to the server
     const response = await fetch(Config.getApi("/users"), {
       method: "POST",
@@ -40,10 +42,16 @@ export default class CreateUser extends Component {
       })
     });
 
-    console.log("response", response);
+    const data = await response.json();
+    const auth = {
+      Authorization: response.headers.Authorization,
+      "X-Access-Token": response.headers["X-Access-Token"]
+    };
+    this.setState({ data, auth });
+    console.log("Register Request", JSON.stringify(this.state));
 
     // Redirect
-    window.location.href = Config.getUrl("/");
+    // window.location.href = Config.getUrl("/");
   }
 
   render() {
@@ -85,16 +93,23 @@ export default class CreateUser extends Component {
           </fieldset>
           <fieldset className="form-group">
             <label>Password:</label>
-            <input
-              value={this.state.password}
-              onChange={this.handleChange.bind(this, "password")}
-              id="password"
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Enter your password"
-              required
-            />
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <div className="input-group-text">
+                  <Octicon icon={Eye}/>
+                </div>
+              </div>
+              <input
+                value={this.state.password}
+                onChange={this.handleChange.bind(this, "password")}
+                id="password"
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
             <small id="passwordHelpInline" className="text-muted">
               Must be 8-20 characters long.
             </small>

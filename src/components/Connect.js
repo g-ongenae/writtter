@@ -6,9 +6,12 @@ export default class Connect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      username: "",
+      password: "",
+      data: null,
+      auth: null
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,31 +26,34 @@ export default class Connect extends Component {
     // Prevent from refreshing
     event.preventDefault();
 
-    console.log("Event", event);
     // Send data to the server
     const response = await fetch(Config.getApi("/users/login"), {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+        "Content-Type": "application/json",
         username: this.state.username,
         password: this.state.password
-      })
+      }
     });
 
-    console.log("response", response);
+    const data = await response.json();
+    const auth = {
+      Authorization: response.headers.get("Authorization"),
+      "X-Access-Token": response.headers.get("X-Access-Token"),
+    };
+    this.setState({ auth, data });
+    console.log("Connect Request", JSON.stringify(this.state));
 
     // Redirect
-    window.location.href = Config.getUrl("/");
+    // window.location.href = Config.getUrl("/");
   }
 
   render() {
     return (
       <div className="container">
         <h1> Connect </h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <fieldset className="form-group">
             <label>Username:</label>
             <input
