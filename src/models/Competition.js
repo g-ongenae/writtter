@@ -47,7 +47,7 @@ module.exports = class Competition {
   }
 
   async getAllCompetitionsByCreator(creatorId) {
-    if (creatorId) {
+    if (!creatorId) {
       throw new Error("No user id");
     }
 

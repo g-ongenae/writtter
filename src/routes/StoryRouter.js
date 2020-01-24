@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const Boom = require("boom");
 const Router = require("koa-router");
 
@@ -20,6 +21,7 @@ class StoryRouter {
   _routes() {
     this.router.delete("/:id", this._delete);
     this.router.get("/users/:id", this._getByOwnerId);
+    this.router.get("/all", this._getAll);
     this.router.get("/:id", this._get);
     this.router.get("/", this._search);
     this.router.patch("/:id", this._put);
@@ -72,6 +74,23 @@ class StoryRouter {
 
       throw error;
     }
+  }
+
+  async _getAll(ctx) {
+    const story = new Story();
+    let stories = await story.getAllStories();
+
+    const ownerId = _.get(ctx, "request.user.data.id");
+    if (!_.isNil(ownerId)) {
+      const userStories = await story.getAllStoriesByOwner(ownerId);
+      stories = _.concat(stories, userStories);
+    }
+
+    ctx.body = stories;
+    ctx.status = 200;
+    ctx.message = "OK";
+
+    return;
   }
 
   async _delete(ctx) {

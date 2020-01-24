@@ -42,7 +42,7 @@ module.exports = class Rule {
   }
 
   async getAllRulesOwnedByAUser(ownerId) {
-    if (ownerId) {
+    if (!ownerId) {
       throw new Error("No user id");
     }
 

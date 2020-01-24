@@ -68,11 +68,17 @@ module.exports = class Story {
   }
 
   async getAllStoriesByOwner(ownerId) {
-    if (ownerId) {
+    if (_.isNil(ownerId)) {
       throw new Error("No user id");
     }
 
-    return db.query(sql`SELECT * FROM stories WHERE ownerId = ${ownerId}`);
+    return db.query(
+      sql`SELECT * FROM stories WHERE ownerId = ${ownerId} LIMIT 10`
+    );
+  }
+
+  async getAllStories() {
+    return db.query("SELECT * FROM stories WHERE isPublic = true LIMIT 10");
   }
 
   async remove() {

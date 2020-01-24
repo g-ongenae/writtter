@@ -40,7 +40,7 @@ module.exports = class Edit {
   }
 
   async getAllEditsOwnedByAUser(editorId) {
-    if (editorId) {
+    if (!editorId) {
       throw new Error("No user id");
     }
 
@@ -48,7 +48,7 @@ module.exports = class Edit {
   }
 
   async getAllEditsRelatedToAStory(storyId) {
-    if (storyId) {
+    if (!storyId) {
       throw new Error("No story id");
     }
 

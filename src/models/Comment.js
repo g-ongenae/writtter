@@ -42,7 +42,7 @@ module.exports = class Comment {
   }
 
   async getAllCommentsOwnedByAUser(authorId) {
-    if (authorId) {
+    if (!authorId) {
       throw new Error("No user id");
     }
 
@@ -50,7 +50,7 @@ module.exports = class Comment {
   }
 
   async getAllCommentsRelatedToAStory(storyId) {
-    if (storyId) {
+    if (!storyId) {
       throw new Error("No story id");
     }
 
