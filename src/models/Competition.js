@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const {
   defineTable,
   Schema,
@@ -26,7 +27,7 @@ module.exports = class Competition {
     this._id = id;
   }
 
-  async getId() {
+  getId() {
     return this._id;
   }
 
@@ -40,9 +41,7 @@ module.exports = class Competition {
   }
 
   async getData() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     return db.query(sql`SELECT * FROM competitions WHERE id = ${this._id}`);
   }
@@ -58,17 +57,13 @@ module.exports = class Competition {
   }
 
   async remove() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     return db.query(sql`DELETE FROM competitions WHERE id = ${this._id}`);
   }
 
   async update(values) {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     const res = await db.query(sql`
       UPDATE competitions
@@ -83,5 +78,16 @@ module.exports = class Competition {
     return db.query(
       sql`SELECT id FROM competitions WHERE name IS LIKE '%${value}%'`
     );
+  }
+
+  /**
+   * Check _id exists in the class
+   * @private
+   * @throws
+   */
+  assertIdExists() {
+    if (_.isNil(this._id)) {
+      throw new Error("No id");
+    }
   }
 };

@@ -33,7 +33,7 @@ class EditRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = await edit.getId();
+    ctx.body = edit.getId();
 
     return;
   }
@@ -77,7 +77,7 @@ class EditRouter {
   async _delete(ctx) {
     const edit = new Edit(ctx.params.id);
 
-    const editId = await edit.getId();
+    const editId = edit.getId();
     await edit.remove();
 
     ctx.message = "OK — Edit deleted from database";

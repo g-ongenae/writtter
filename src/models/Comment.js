@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const {
   defineTable,
   Schema,
@@ -21,7 +22,7 @@ module.exports = class Comment {
     this._id = id;
   }
 
-  async getId() {
+  getId() {
     return this._id;
   }
 
@@ -35,9 +36,7 @@ module.exports = class Comment {
   }
 
   async getData() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     return db.query(sql`SELECT * FROM comments WHERE id = ${this._id}`);
   }
@@ -59,17 +58,13 @@ module.exports = class Comment {
   }
 
   async remove() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     return db.query(sql`DELETE FROM comments WHERE id = ${this._id}`);
   }
 
   async update(values) {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     const res = await db.query(sql`
       UPDATE comments
@@ -84,5 +79,16 @@ module.exports = class Comment {
     return db.query(
       sql`SELECT id FROM comments WHERE name IS LIKE '%${value}%'`
     );
+  }
+
+  /**
+   * Check _id exists in the class
+   * @private
+   * @throws
+   */
+  assertIdExists() {
+    if (_.isNil(this._id)) {
+      throw new Error("No id");
+    }
   }
 };

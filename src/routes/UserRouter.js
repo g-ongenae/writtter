@@ -108,6 +108,7 @@ class UserRouter {
       ctx.status = 200;
       ctx.set("authorization", token);
       ctx.set("x-access-token", token);
+      ctx.body = await user.getSafeData();
 
       return;
     } else {

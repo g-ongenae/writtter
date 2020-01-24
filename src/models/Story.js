@@ -76,9 +76,7 @@ module.exports = class Story {
   }
 
   async remove() {
-    if (!this._id) {
-      throw new Error("No id");
-    }
+    this.assertIdExists();
 
     return db.query(sql`DELETE FROM stories WHERE id = ${this._id}`);
   }

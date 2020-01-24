@@ -33,7 +33,7 @@ class CompetitionRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = await competition.getId();
+    ctx.body = competition.getId();
 
     return;
   }
@@ -77,7 +77,7 @@ class CompetitionRouter {
   async _delete(ctx) {
     const competition = new Competition(ctx.params.id);
 
-    const competitionId = await competition.getId();
+    const competitionId = competition.getId();
     await competition.remove();
 
     ctx.message = "OK — Competition deleted from database";

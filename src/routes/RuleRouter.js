@@ -33,7 +33,7 @@ class RuleRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = await rule.getId();
+    ctx.body = rule.getId();
 
     return;
   }
@@ -77,7 +77,7 @@ class RuleRouter {
   async _delete(ctx) {
     const rule = new Rule(ctx.params.id);
 
-    const ruleId = await rule.getId();
+    const ruleId = rule.getId();
     await rule.remove();
 
     ctx.message = "OK — Rule deleted from database";

@@ -34,7 +34,7 @@ class CommentRouter {
 
     ctx.message = "OK";
     ctx.status = 200;
-    ctx.body = await comment.getId();
+    ctx.body = comment.getId();
 
     return;
   }
@@ -78,7 +78,7 @@ class CommentRouter {
   async _delete(ctx) {
     const comment = new Comment(ctx.params.id);
 
-    const commentId = await comment.getId();
+    const commentId = comment.getId();
     await comment.remove();
 
     ctx.message = "OK — Comment deleted from database";
