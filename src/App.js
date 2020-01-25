@@ -11,13 +11,14 @@ import Menu from "./components/Menu";
 import UserPage from "./components/UserPage";
 import CreateUser from "./components/creates/CreateUser";
 import StoryReader from "./components/readers/StoryReader";
+import StoryEditor from "./components/editor/StoryEditor";
 import HomePage from "./components/HomePage";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: "",
     };
     if (window.location.search) {
       const query = new URLSearchParams(window.location.search);
@@ -37,16 +38,17 @@ export default class App extends Component {
 
           <Switch>
             <Route path={Config.getUrl("/about")} component={AboutView} />
-            <Route path={Config.getUrl('/create')} component={CreateView} />
-            <Route path={Config.getUrl('/search')} component={SearchPage} />
-            <Route path={Config.getUrl('/profile')}>
+            <Route path={Config.getUrl("/create")} component={CreateView} />
+            <Route path={Config.getUrl("/search")} component={SearchPage} />
+            <Route path={Config.getUrl("/profile")}>
               <UserPage userId={this.state.userId} />
             </Route>
-            <Route path={Config.getUrl('/user/:userId')} component={({ match }) => (<UserPage userId={match.params.userId}/>)} />
-            <Route path={Config.getUrl('/login')} component={Connect} />
-            <Route path={Config.getUrl('/register')} component={CreateUser} />
-            <Route path="/story/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
-            <Route exact path="/" component={HomePage} />
+            <Route path={Config.getUrl("/user/:userId")} component={({ match }) => (<UserPage userId={match.params.userId}/>)} />
+            <Route path={Config.getUrl("/login")} component={Connect} />
+            <Route path={Config.getUrl("/register")} component={CreateUser} />
+            <Route path={Config.getUrl("/story/:id/edit")} component={({ match }) => (<StoryEditor storyId={match.params.id} />)} />
+            <Route path={Config.getUrl("/story/:id")} component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
+            <Route exact path={Config.getUrl("/")} component={HomePage} />
           </Switch>
         </Router>
       </div>
