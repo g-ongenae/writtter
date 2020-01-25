@@ -6,7 +6,7 @@ import RuleChoices from "./RuleChoices";
 
 export default class CreateCompetition extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       name: "",
       description: "",
