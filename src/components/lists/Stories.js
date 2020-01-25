@@ -50,6 +50,7 @@ export default class Stories extends Component {
       }
 
       if (!response.ok) {
+        console.log("Error fetching stories", response);
         throw new Error("Could not fetch stories");
       }
 
