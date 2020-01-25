@@ -2,11 +2,26 @@ import React from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 import Config from "../../Config";
+import Context from "../../Context";
+
 import CreateCompetition from "./CreateCompetition";
 import CreateRule from "./CreateRule";
 import CreateStory from "./CreateStory";
 
 export default function CreateView(props) {
+  if (!Context.has("auth")) {
+    return (
+      <section className="App-section">
+        <h1>Take part in a fantastic world of stories!</h1>
+        <p className="text-center">
+          You need to be authenticated to create a story.<br />
+          <Link to={Config.getUrl("/register")}>Create a new account</Link><br />
+          <Link to={Config.getUrl("/login")}>Or connect to your account</Link>
+        </p>
+      </section>
+    );
+  }
+
   return (
     <Router>
       <Menu activeViewName={props.location.pathname} />
