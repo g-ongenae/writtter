@@ -127,6 +127,7 @@ export default class StoryReader extends Component {
     }
 
     return (
+      <div className="App-sub-section">
       <div className="container">
         <div>
           <h1>
@@ -180,6 +181,7 @@ export default class StoryReader extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

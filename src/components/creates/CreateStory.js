@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Config from "../../Config";
 import Context from "../../Context";
 
-// import TagChoices from "./TagChoices";
-// import RuleChoices from "./RuleChoices";
+import TagChoices from "./TagChoices";
+import RuleChoices from "./RuleChoices";
 
 export default class CreateStory extends Component {
   constructor(props) {
@@ -68,6 +68,7 @@ export default class CreateStory extends Component {
 
   render() {
     return (
+      <div className="App-sub-section">
       <div className="container">
         <h1>Create a new story</h1>
 
@@ -116,15 +117,14 @@ export default class CreateStory extends Component {
             />
             <label className="form-check-label">Comments enabled</label>
           </fieldset>
-          {/* TODO fix me
           <fieldset className="form-group">
             <label>Rules:</label>
             <RuleChoices userId={this.props.userId} />
-          </fieldset> */}
-          {/* <fieldset className="form-group">
+          </fieldset>
+          <fieldset className="form-group">
             <label>Tags:</label>
             <TagChoices userId={this.props.userId} />
-          </fieldset> */}
+          </fieldset>
           <fieldset className="form-group text-center">
             <input
               type="submit"
@@ -133,6 +133,7 @@ export default class CreateStory extends Component {
             />
           </fieldset>
         </form>
+      </div>
       </div>
     );
   }

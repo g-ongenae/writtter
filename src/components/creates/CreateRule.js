@@ -5,6 +5,7 @@ import TagChoices from "./TagChoices";
 export default class CreateRule extends Component {
   render() {
     return (
+      <div className="App-sub-section">
       <div className="container">
         <h1>Create a new rule</h1>
 
@@ -48,6 +49,7 @@ export default class CreateRule extends Component {
             />
           </fieldset>
         </form>
+      </div>
       </div>
     );
   }

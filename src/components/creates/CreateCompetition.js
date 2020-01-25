@@ -22,6 +22,7 @@ export default class CreateCompetition extends Component {
 
   render() {
     return (
+      <div className="App-sub-section">
       <div className="container">
         <h1>Create a new competition</h1>
 
@@ -86,6 +87,7 @@ export default class CreateCompetition extends Component {
             />
           </fieldset>
         </form>
+      </div>
       </div>
     );
   }

@@ -21,6 +21,7 @@ function SearchBar() {
   return (
     <div className="container">
       <h1> Search Page </h1>
+      <div className="App-sub-section">
       <form className="form-row">
         <div className="col-sm-2"></div>
         <fieldset className="col-sm-7 form-group">
@@ -43,6 +44,7 @@ function SearchBar() {
           <input type="submit" value="Search" className="btn btn-primary" />
         </fieldset>
       </form>
+      </div>
     </div>
   );
 }

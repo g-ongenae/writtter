@@ -71,6 +71,7 @@ export default class Connect extends Component {
 
   render() {
     return (
+      <div className="App-sub-section">
       <div className="container">
         <h1> Connect </h1>
         <form onSubmit={this.handleSubmit}>
@@ -104,6 +105,7 @@ export default class Connect extends Component {
             <input type="submit" value="Log in" className="btn btn-primary" />
           </fieldset>
         </form>
+      </div>
       </div>
     );
   }

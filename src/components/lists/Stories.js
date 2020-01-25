@@ -67,18 +67,17 @@ export default class Stories extends Component {
     if (error) {
       return (
         <div className="App-section">
-          {" "}
-          An error occurred, sorry: {error.message}{" "}
+          An error occurred, sorry: {error.message}
         </div>
       );
     }
 
     if (isLoading || !stories) {
-      return <div className="App-section"> Loading story... </div>;
+      return <div className="App-section">Loading story...</div>;
     }
 
     if (Array.isArray(stories) && stories.length === 0) {
-      return <div className="App-section"> No stories </div>;
+      return <div className="App-section">No stories</div>;
     }
 
     const storyList = stories.map(story => (
@@ -95,9 +94,11 @@ export default class Stories extends Component {
     ));
 
     return (
-      <ul name="rules" className="list-group">
-        {storyList}
-      </ul>
+      <div className="App-section">
+        <ul name="rules" className="list-group">
+          {storyList}
+        </ul>
+      </div>
     );
   }
 }

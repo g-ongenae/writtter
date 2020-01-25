@@ -47,11 +47,19 @@ export default class StoryReader extends Component {
     const { story, isLoading, error } = this.state;
 
     if (error) {
-      return <p>An error occurred, sorry: {error.message}</p>;
+      return (
+        <section className="App-section">
+          <h1>An error occurred: {error && error.message}</h1>
+        </section>
+      );
     }
 
     if (isLoading || !story) {
-      return <div> Loading story </div>;
+      return (
+        <section className="App-section">
+          <h1>Loading story...</h1>
+        </section>
+      );
     }
 
     const editLink = (
@@ -74,20 +82,22 @@ export default class StoryReader extends Component {
 
     const date = new Date(story.lastEditedAt || story.createdAt);
     return (
-      <div className="container">
-        <div className="card panel-default">
-          <div className="card-header text-center">
-            <b>{story.name}</b> — by{" "}
-            <Link to={Config.getUrl(`/user/${story.ownerId}`)}>
-              {story.ownerId}
-            </Link>{" "}
-            — {date.toDateString()}
-          </div>
-          <div className="card-body">
-            {story.content || "No content for now"}
-          </div>
-          <div className="card-footer">
-            {Context.has("auth") ? editLink : connectLink}
+      <div className="App-sub-section">
+        <div className="container">
+          <div className="card panel-default">
+            <div className="card-header text-center">
+              <b>{story.name}</b> — by{" "}
+              <Link to={Config.getUrl(`/user/${story.ownerId}`)}>
+                {story.ownerId}
+              </Link>{" "}
+              — {date.toDateString()}
+            </div>
+            <div className="card-body">
+              {story.content || "No content for now"}
+            </div>
+            <div className="card-footer">
+              {Context.has("auth") ? editLink : connectLink}
+            </div>
           </div>
         </div>
       </div>

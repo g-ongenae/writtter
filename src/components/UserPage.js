@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 import Config from "../Config";
 import Context from "../Context";
@@ -82,43 +82,46 @@ export default class UserPage extends Component {
     // TODO add style and details about the user
     return (
       <div>
-        <Router>
-          <div>
-            <h1>
-              <small className="text-muted">Profile of</small>{" "}
-              {this.state.userData.username}
-            </h1>
-          </div>
+        <div>
+          <h1>
+            <small className="text-muted">Profile of</small>{" "}
+            {this.state.userData.username}
+          </h1>
+        </div>
 
-          <UserMenu
-            userId={this.state.userId}
-            activeViewName={window.location.pathname}
-          />
-
-          <Switch>
-            <Route path={Config.getUrl("/user/:userId/stories")}>
-              <Stories liked={false} userId={this.state.userId} />
-            </Route>
-            <Route path={Config.getUrl("/user/:userId/competitions")}>
-              <Competitions userId={this.state.userId} />
-            </Route>
-            <Route path={Config.getUrl("/user/:userId/likes")}>
-              <Stories liked={true} userId={this.state.userId} />
-            </Route>
-            <Route path={Config.getUrl("/user/:userId/comments")}>
-              <Comments userId={this.state.userId} />
-            </Route>
-            <Route path={Config.getUrl("/user/:userId/rules")}>
-              <Comments userId={this.state.userId} />
-            </Route>
-            <Route path={Config.getUrl("/user/:userId")}>
-              <Stories liked={false} userId={this.state.userId} />
-            </Route>
-          </Switch>
-        </Router>
+        <UserMenu
+          userId={this.state.userId}
+          activeViewName={window.location.pathname}
+        />
+        <UserSwitch userId={this.state.userId} />
       </div>
     );
   }
+}
+
+function UserSwitch({ userId }) {
+  return (
+    <Switch>
+      <Route path={Config.getUrl("/user/:userId/stories")}>
+        <Stories liked={false} userId={userId} />
+      </Route>
+      <Route path={Config.getUrl("/user/:userId/competitions")}>
+        <Competitions userId={userId} />
+      </Route>
+      <Route path={Config.getUrl("/user/:userId/likes")}>
+        <Stories liked={true} userId={userId} />
+      </Route>
+      <Route path={Config.getUrl("/user/:userId/comments")}>
+        <Comments userId={userId} />
+      </Route>
+      <Route path={Config.getUrl("/user/:userId/rules")}>
+        <Comments userId={userId} />
+      </Route>
+      <Route path={Config.getUrl("/user/:userId")}>
+        <Stories liked={false} userId={userId} />
+      </Route>
+    </Switch>
+  );
 }
 
 function UserMenu({ userId, activeViewName }) {

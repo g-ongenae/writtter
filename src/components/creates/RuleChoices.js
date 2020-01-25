@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Config from "../../Config";
+import Context from "../../Context";
 
 export default class RuleChoices extends Component {
   constructor(props) {
@@ -14,15 +15,29 @@ export default class RuleChoices extends Component {
   async componentDidMount() {
     this.setState({ isLoading: true });
 
+    let headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    };
+
+    if (Context.has("auth")) {
+      headers = { ...headers, ...Context.get("auth") };
+    }
+
+    const request = {
+      method: "GET",
+      headers
+    };
+
     try {
-      const response = await fetch(Config.getApi("/rules"));
+      const response = await fetch(Config.getApi("/rules"), request);
 
       if (!response.ok) {
         throw new Error("Could not fetch tags");
       }
 
       const data = await response.json();
-      this.setState({ tags: data.tags, isLoading: false });
+      this.setState({ rules: data, isLoading: false });
     } catch (error) {
       this.setState({ error, isLoading: false });
     }
