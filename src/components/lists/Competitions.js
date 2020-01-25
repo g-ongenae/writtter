@@ -1,13 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Competitions extends Component {
-  constructor(props) {
-    super(props);
-
-    console.log("Hello");
-  }
-
-  render() {
-    return <h1>Hello here are the competitions</h1>;
-  }
+export default function Competitions() {
+  return <div className="App-section"> Coming soon... </div>;
 }

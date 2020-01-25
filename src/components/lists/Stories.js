@@ -65,15 +65,15 @@ export default class Stories extends Component {
     const { stories, isLoading, error } = this.state;
 
     if (error) {
-      return <p>An error occurred, sorry: {error.message}</p>;
+      return <div className="App-section"> An error occurred, sorry: {error.message} </div>;
     }
 
     if (isLoading || !stories) {
-      return <div> Loading story </div>;
+      return <div className="App-section"> Loading story... </div>;
     }
 
     if (Array.isArray(stories) && stories.length === 0) {
-      return <div> No stories </div>;
+      return <div className="App-section"> No stories </div>;
     }
 
     const storyList = stories.map(story => (

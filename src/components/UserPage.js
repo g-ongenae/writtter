@@ -62,8 +62,8 @@ export default class UserPage extends Component {
   }
 
   render() {
-    const { error, isLoading, userId } = this.state;
-    if (error || (!isLoading && !userId)) {
+    const { error, isLoading, userData } = this.state;
+    if (error || (!isLoading && !userData)) {
       return (
         <section className="App-section">
           <h1>An error occurred: {error && error.message}</h1>
@@ -84,20 +84,13 @@ export default class UserPage extends Component {
       <div>
         <Router>
           <div>
-            <h1>Username: {this.state.userData.username}</h1>
+            <h1>
+              <small className="text-muted">Profile of</small>{" "}
+              {this.state.userData.username}
+            </h1>
           </div>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/stories`)}>
-            Stories
-          </Link>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/competitions`)}>
-            Competitions
-          </Link>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/likes`)}>
-            Likes
-          </Link>
-          <Link to={Config.getUrl(`/user/${this.state.userId}/comments`)}>
-            Comments
-          </Link>
+
+          <UserMenu userId={this.state.userId} activeViewName={window.location.pathname} />
 
           <Switch>
             <Route path={Config.getUrl("/user/:userId/stories")}>
@@ -112,6 +105,9 @@ export default class UserPage extends Component {
             <Route path={Config.getUrl("/user/:userId/comments")}>
               <Comments userId={this.state.userId} />
             </Route>
+            <Route path={Config.getUrl("/user/:userId/rules")}>
+              <Comments userId={this.state.userId} />
+            </Route>
             <Route path={Config.getUrl("/user/:userId")}>
               <Stories liked={false} userId={this.state.userId} />
             </Route>
@@ -120,4 +116,70 @@ export default class UserPage extends Component {
       </div>
     );
   }
+}
+
+function UserMenu({ userId, activeViewName }) {
+  const active = "btn btn-lg btn-block btn-outline-primary";
+  const inactive = "btn btn-lg btn-block btn-primary";
+  const macro = propName =>
+    `user/${userId}/${propName}` === activeViewName ? active : inactive;
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light rounded">
+      <div className="navbar-collapse justify-content-md-center">
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl(`/user/${userId}/stories`)}
+                className={macro("story")}
+              >
+                Stories
+              </Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl(`/user/${userId}/competitions`)}
+                className={macro("competition")}
+              >
+                Competitions
+              </Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl(`/user/${userId}/rules`)}
+                className={macro("rules")}
+              >
+                Rules
+              </Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl(`/user/${userId}/comments`)}
+                className={macro("comments")}
+              >
+                Comments
+              </Link>
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl(`/user/${userId}/likes`)}
+                className={macro("likes")}
+              >
+                Likes
+              </Link>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
 }
