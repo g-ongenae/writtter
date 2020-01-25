@@ -68,8 +68,7 @@ export default class UserPage extends Component {
     if (error || (!isLoading && !userId)) {
       return (
         <section className="App-section">
-          {" "}
-          <h1>An error occurred: {error && error.message}</h1>{" "}
+          <h1>An error occurred: {error && error.message}</h1>
         </section>
       );
     }
@@ -77,8 +76,7 @@ export default class UserPage extends Component {
     if (isLoading) {
       return (
         <section className="App-section">
-          {" "}
-          <h1>Loading...</h1>{" "}
+          <h1>Loading...</h1>
         </section>
       );
     }
@@ -87,8 +85,7 @@ export default class UserPage extends Component {
       <div>
         <Router>
           <div>
-            {/* Username: {username = "Guillaume"} */}
-            {/* <img> {userimage = "hello"} </img> */}
+            <h1>Username: {this.state.userData.username}</h1>
           </div>
           <Link to={Config.getUrl(`/user/${this.state.userId}/stories`)}>
             Stories

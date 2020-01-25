@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import Config from "../../Config";
+import Context from "../../Context";
 
 export default class StoryReader extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       story: {},
       isLoading: false,
@@ -18,7 +19,14 @@ export default class StoryReader extends Component {
     this.setState({ isLoading: true });
     try {
       const response = await fetch(
-        Config.getApi(`/stories/${this.state.storyId}`)
+        Config.getApi(`/stories/${this.state.storyId}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            ...(Context.get("auth") || {})
+          }
+        })
       );
       if (!response.ok) {
         throw new Error("Something went wrong...");

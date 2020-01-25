@@ -22,7 +22,7 @@ export class Config {
    */
   getUrl(url = "") {
     const u = `${this.FRONT_BASE_URL}${url}`;
-    console.log("URL TO NEXT PAGE: ", u);
+    // console.log("URL TO NEXT PAGE: ", u);
 
     return u;
   }

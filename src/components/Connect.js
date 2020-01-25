@@ -39,14 +39,14 @@ export default class Connect extends Component {
 
     const data = await response.json();
     const auth = {
-      Authorization: response.headers.get("Authorization"),
-      "X-Access-Token": response.headers.get("X-Access-Token")
+      authorization: response.headers.get("authorization"),
+      "x-access-token": response.headers.get("x-access-token")
     };
     this.setState({ auth, data });
     console.log("Connect Request", JSON.stringify(this.state));
 
     // Redirect
-    window.location.href = Config.getUrl(`/?a=${auth.Authorization}`);
+    window.location.href = Config.getUrl(`/?a=${auth.authorization}`);
   }
 
   render() {
