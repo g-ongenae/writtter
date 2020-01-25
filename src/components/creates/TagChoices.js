@@ -4,7 +4,7 @@ import Config from "../../Config";
 
 export default class TagChoices extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       tags: [],

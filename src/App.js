@@ -26,7 +26,6 @@ export default class App extends Component {
         "x-access-token": query.get("a"),
       };
       Context.set("auth", auth);
-      console.log("Context", Context);
     }
   }
 

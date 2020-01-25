@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Stories from "./lists/Stories";
 
 export default class HomePage extends Component {
-  constructor(params) {
-    super(params);
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 

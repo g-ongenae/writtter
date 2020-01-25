@@ -54,7 +54,6 @@ export default class Stories extends Component {
       }
 
       const stories = await response.json();
-      console.log("response: ", stories);
       this.setState({ stories, isLoading: false });
     } catch (error) {
       this.setState({ error, isLoading: false });
