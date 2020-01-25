@@ -61,28 +61,34 @@ function Menu({ activeViewName }) {
       <div className="navbar-collapse justify-content-md-center">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link className="nav-link" to={Config.getUrl("/create/story")}>
-              <button type="button" className={macro("story")}>
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl("/create/story")}
+                className={macro("story")}
+              >
                 Story
-              </button>
-            </Link>
+              </Link>
+            </span>
           </li>
           <li className="nav-item">
-            <Link
-              className="nav-link"
-              to={Config.getUrl("/create/competition")}
-            >
-              <button type="button" className={macro("competition")}>
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl("/create/competition")}
+                className={macro("competition")}
+              >
                 Competition
-              </button>
-            </Link>
+              </Link>
+            </span>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={Config.getUrl("/create/rule")}>
-              <button type="button" className={macro("rule")}>
+            <span className="nav-link">
+              <Link
+                to={Config.getUrl("/create/rule")}
+                className={macro("rule")}
+              >
                 Rule
-              </button>
-            </Link>
+              </Link>
+            </span>
           </li>
         </ul>
       </div>
