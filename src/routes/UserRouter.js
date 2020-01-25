@@ -34,6 +34,10 @@ class UserRouter {
     const user = new User();
     await user.save(ctx.request.body);
 
+    const token = user.generateAuthToken();
+    ctx.set("authorization", token);
+    ctx.set("x-access-token", token);
+
     ctx.message = "OK";
     ctx.status = 200;
     ctx.body = {
