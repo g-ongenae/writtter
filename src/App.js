@@ -15,7 +15,7 @@ import HomePage from "./components/HomePage";
 
 export default class App extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       userId: '',
     };
