@@ -59,11 +59,11 @@ export default function Menu({ loggedIn }) {
               About
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/search")}>
               Search
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <Link className="nav-link" to={Config.getUrl("/create")}>
               Create
@@ -72,7 +72,7 @@ export default function Menu({ loggedIn }) {
           {logButtons[0]}
           {logButtons[1]}
         </ul>
-        <form className="form-inline my-2 my-lg-0">
+        {/* <form className="form-inline my-2 my-lg-0">
           <input
             className="form-control mr-sm-2"
             type="search"
@@ -85,7 +85,7 @@ export default function Menu({ loggedIn }) {
           >
             Search
           </button>
-        </form>
+        </form> */}
       </div>
     </nav>
   );
