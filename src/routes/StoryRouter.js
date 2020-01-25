@@ -84,6 +84,7 @@ class StoryRouter {
     if (!_.isNil(ownerId)) {
       const userStories = await story.getAllStoriesByOwner(ownerId);
       stories = _.concat(stories, userStories);
+      stories = _.uniqBy(stories, e => e.id); // Remove duplicates
     }
 
     ctx.body = stories;
