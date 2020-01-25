@@ -79,7 +79,7 @@ export default class Stories extends Component {
     const storyList = stories.map(story => (
       <li key={story.id}>
         <b>
-          <Link to={Config.getUrl(`/story/${story.id}}`)}>{story.name}</Link>
+          <Link to={Config.getUrl(`/story/${story.id}`)}>{story.name}</Link>
         </b>{" "}
         — by{" "}
         <Link to={Config.getUrl(`/user/${story.ownerId}`)}>
