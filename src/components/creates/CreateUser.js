@@ -44,14 +44,14 @@ export default class CreateUser extends Component {
 
     const data = await response.json();
     const auth = {
-      Authorization: response.headers.Authorization,
-      "X-Access-Token": response.headers["X-Access-Token"]
+      authorization: response.headers.get("authorization"),
+      "x-access-token": response.headers.get("x-access-token")
     };
     this.setState({ data, auth });
     console.log("Register Request", JSON.stringify(this.state));
 
     // Redirect
-    window.location.href = Config.getUrl(`/?a=${auth.Authorization}`);
+    window.location.href = Config.getUrl(`/?a=${auth.authorization}`);
   }
 
   render() {
