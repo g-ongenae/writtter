@@ -37,6 +37,26 @@ export default class Connect extends Component {
       }
     });
 
+    if (!response.ok) {
+      console.log("Failed to authenticate", response);
+      let message;
+
+      switch (response.status) {
+        case 404:
+          message = "Username does not exist";
+          break;
+        case 401:
+          message = "Wrong password";
+          break;
+        default:
+          throw new Error(response.statusText);
+      }
+
+      alert(message);
+
+      return;
+    }
+
     const data = await response.json();
     const auth = {
       authorization: response.headers.get("authorization"),
