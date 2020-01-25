@@ -32,23 +32,18 @@ export default class UserPage extends Component {
       headers = { ...headers, ...Context.get("auth") };
     }
 
+    const request = {
+      method: "GET",
+      headers
+    };
+
     try {
       let response;
       if (!this.state.userId) {
         console.log("Hello from the client", Context, headers);
-        response = await fetch(
-          Config.getApi("/users/auth", {
-            method: "GET",
-            headers
-          })
-        );
+        response = await fetch(Config.getApi("/users/auth"), request);
       } else {
-        response = await fetch(
-          Config.getApi(`/users/${this.state.userId}`, {
-            method: "GET",
-            headers
-          })
-        );
+        response = await fetch(Config.getApi(`/users/${this.state.userId}`), request);
       }
 
       if (!response.ok) {
