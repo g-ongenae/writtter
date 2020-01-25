@@ -8,10 +8,10 @@ export default class CreateStory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: "",
       isPublic: false,
       isCommentsDisabled: false,
-      description: '',
+      description: "",
       ownerId: 1 // TODO fix me
     };
 
@@ -42,7 +42,7 @@ export default class CreateStory extends Component {
         name: this.state.name,
         description: this.state.description,
         isPublic: this.state.isPublic,
-        isCommentsDisabled: !this.state.isCommentsDisabled,
+        isCommentsDisabled: !this.state.isCommentsDisabled
       })
     });
 

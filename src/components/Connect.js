@@ -40,7 +40,7 @@ export default class Connect extends Component {
     const data = await response.json();
     const auth = {
       Authorization: response.headers.get("Authorization"),
-      "X-Access-Token": response.headers.get("X-Access-Token"),
+      "X-Access-Token": response.headers.get("X-Access-Token")
     };
     this.setState({ auth, data });
     console.log("Connect Request", JSON.stringify(this.state));

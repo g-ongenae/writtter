@@ -96,7 +96,7 @@ export default class CreateUser extends Component {
             <div className="input-group">
               <div className="input-group-prepend">
                 <div className="input-group-text">
-                  <Octicon icon={Eye}/>
+                  <Octicon icon={Eye} />
                 </div>
               </div>
               <input

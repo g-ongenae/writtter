@@ -11,7 +11,7 @@ export default class Stories extends Component {
       stories: null,
       isLoading: false,
       userId: props.userId || null,
-      liked: props.liked || false,
+      liked: props.liked || false
     };
   }
 
@@ -23,22 +23,28 @@ export default class Stories extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       };
-      
-      if (Context.has("auth")) {
-        headers = { ...headers, ...Context.get("auth") }; 
+
+      if (Context.has("auth")) {
+        headers = { ...headers, ...Context.get("auth") };
       }
 
-      const request =  {
+      const request = {
         method: "GET",
-        headers,
+        headers
       };
 
       let response;
 
       if (this.state.userId && !this.state.liked) {
-        response = await fetch(Config.getApi(`/stories/users/${this.state.userId}`), request);
+        response = await fetch(
+          Config.getApi(`/stories/users/${this.state.userId}`),
+          request
+        );
       } else if (this.state.userId && this.state.liked) {
-        response = await fetch(Config.getApi(`/stories/likes/${this.state.userId}`), request);
+        response = await fetch(
+          Config.getApi(`/stories/likes/${this.state.userId}`),
+          request
+        );
       } else {
         response = await fetch(Config.getApi("/stories/all"), request);
       }
@@ -72,9 +78,14 @@ export default class Stories extends Component {
 
     const storyList = stories.map(story => (
       <li key={story.id}>
-        <b><Link to={Config.getUrl(`/story/${story.id}}`)}>{story.name}</Link></b> — by{" "}
-        <Link to={Config.getUrl(`/user/${story.ownerId}`)}>{story.ownerId}</Link> —{" "}
-        {(new Date(story.lastEditedAt || story.createdAt)).toDateString()}
+        <b>
+          <Link to={Config.getUrl(`/story/${story.id}}`)}>{story.name}</Link>
+        </b>{" "}
+        — by{" "}
+        <Link to={Config.getUrl(`/user/${story.ownerId}`)}>
+          {story.ownerId}
+        </Link>{" "}
+        — {new Date(story.lastEditedAt || story.createdAt).toDateString()}
       </li>
     ));
 

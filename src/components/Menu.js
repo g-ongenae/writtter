@@ -6,7 +6,7 @@ import Context from "../Context";
 
 export default function Menu() {
   const logButtons = [];
-  // TODO simplify 
+  // TODO simplify
   if (!Context.has("auth")) {
     logButtons.push(
       <li className="nav-item">
@@ -31,8 +31,14 @@ export default function Menu() {
       </li>
     );
     logButtons.push(
-      <li className="nav-item" onClick={() => { Context.unset("auth"); window.location.href = Config.getUrl("/"); }}>
-        <span className="nav-link" style={{color: "lightcoral"}}>
+      <li
+        className="nav-item"
+        onClick={() => {
+          Context.unset("auth");
+          window.location.href = Config.getUrl("/");
+        }}
+      >
+        <span className="nav-link" style={{ color: "lightcoral" }}>
           Log out
         </span>
       </li>

@@ -14,8 +14,10 @@ export default function CreateView(props) {
       <section className="App-section">
         <h1>Take part in a fantastic world of stories!</h1>
         <p className="text-center">
-          You need to be authenticated to create a story.<br />
-          <Link to={Config.getUrl("/register")}>Create a new account</Link><br />
+          You need to be authenticated to create a story.
+          <br />
+          <Link to={Config.getUrl("/register")}>Create a new account</Link>
+          <br />
           <Link to={Config.getUrl("/login")}>Or connect to your account</Link>
         </p>
       </section>

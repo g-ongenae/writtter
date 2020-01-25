@@ -27,24 +27,28 @@ export default class UserPage extends Component {
       Accept: "application/json",
       "Content-Type": "application/json"
     };
-      
-    if (Context.has("auth")) {
-      headers = { ...headers, ...Context.get("auth") }; 
+
+    if (Context.has("auth")) {
+      headers = { ...headers, ...Context.get("auth") };
     }
 
     try {
       let response;
       if (!this.state.userId) {
         console.log("Hello from the client", Context, headers);
-        response = await fetch(Config.getApi("/users/auth", {
-          method: "GET",
-          headers
-        }));
+        response = await fetch(
+          Config.getApi("/users/auth", {
+            method: "GET",
+            headers
+          })
+        );
       } else {
-        response = await fetch(Config.getApi(`/users/${this.state.userId}`, {
-          method: "GET",
-          headers
-        }));
+        response = await fetch(
+          Config.getApi(`/users/${this.state.userId}`, {
+            method: "GET",
+            headers
+          })
+        );
       }
 
       if (!response.ok) {
@@ -62,11 +66,21 @@ export default class UserPage extends Component {
   render() {
     const { error, isLoading, userId } = this.state;
     if (error || (!isLoading && !userId)) {
-      return <section className="App-section"> <h1>An error occurred: {error && error.message}</h1> </section>;
+      return (
+        <section className="App-section">
+          {" "}
+          <h1>An error occurred: {error && error.message}</h1>{" "}
+        </section>
+      );
     }
 
     if (isLoading) {
-      return (<section className="App-section"> <h1>Loading...</h1> </section>);
+      return (
+        <section className="App-section">
+          {" "}
+          <h1>Loading...</h1>{" "}
+        </section>
+      );
     }
 
     return (
