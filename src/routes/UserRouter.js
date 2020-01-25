@@ -22,6 +22,7 @@ class UserRouter {
     this.router.delete("/:id", this._delete);
     this.router.get("/login", this._login);
     this.router.get("/logout", this._logout);
+    this.router.get("/auth", this._getByAuthToken);
     this.router.get("/:id", this._get);
     this.router.get("/", this._search);
     this.router.patch("/:id", this._put);
@@ -77,6 +78,22 @@ class UserRouter {
 
       throw error;
     }
+  }
+
+  async _getByAuthToken(ctx) {
+    const userId = _.get(ctx, "request.user.data.id");
+    const user = new User(userId);
+    const userData = await user.getSafeData();
+
+    if (!userData) {
+      throw Boom.notFound();
+    }
+
+    ctx.message = "OK — User found";
+    ctx.status = 200;
+    ctx.body = userData;
+
+    return;
   }
 
   async _delete(ctx) {
