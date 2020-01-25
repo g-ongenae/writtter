@@ -16,7 +16,7 @@ export default class UserPage extends Component {
       isLoading: false,
       userId: props.userId,
       userData: props.userData || null,
-      error: {}
+      error: null
     };
   }
 
@@ -40,20 +40,23 @@ export default class UserPage extends Component {
     try {
       let response;
       if (!this.state.userId) {
-        console.log("Hello from the client", Context, headers);
         response = await fetch(Config.getApi("/users/auth"), request);
       } else {
-        response = await fetch(Config.getApi(`/users/${this.state.userId}`), request);
+        response = await fetch(
+          Config.getApi(`/users/${this.state.userId}`),
+          request
+        );
       }
 
       if (!response.ok) {
-        console.error("An error occurred: ", response);
+        console.log("Request failed", response);
         throw new Error(response.statusText);
       }
 
       const userData = await response.json();
-      this.setState({ loading: false, userData, userId: userData.id });
+      this.setState({ isLoading: false, userData, userId: userData.id });
     } catch (error) {
+      console.error("An error occurred: ", error);
       this.setState({ error, isLoading: false });
     }
   }
@@ -76,6 +79,7 @@ export default class UserPage extends Component {
       );
     }
 
+    // TODO add style and details about the user
     return (
       <div>
         <Router>
