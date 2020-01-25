@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import Config from "./Config";
+import Context from "./Context";
 import Connect from "./components/Connect";
 import CreateView from "./components/creates/CreateView";
 import SearchPage from "./components/SearchPage";
@@ -18,6 +19,15 @@ export default class App extends Component {
     this.state = {
       userId: '',
     };
+    if (window.location.search) {
+      const query = new URLSearchParams(window.location.search);
+      const auth = {
+        authorization: query.get("a"),
+        "x-access-token": query.get("a"),
+      };
+      Context.set("auth", auth);
+      console.log("Context", Context);
+    }
   }
 
   render() {

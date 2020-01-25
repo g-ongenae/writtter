@@ -46,7 +46,7 @@ export default class Connect extends Component {
     console.log("Connect Request", JSON.stringify(this.state));
 
     // Redirect
-    // window.location.href = Config.getUrl("/");
+    window.location.href = Config.getUrl(`/?a=${auth.Authorization}`);
   }
 
   render() {

@@ -51,7 +51,7 @@ export default class CreateUser extends Component {
     console.log("Register Request", JSON.stringify(this.state));
 
     // Redirect
-    // window.location.href = Config.getUrl("/");
+    window.location.href = Config.getUrl(`/?a=${auth.Authorization}`);
   }
 
   render() {
