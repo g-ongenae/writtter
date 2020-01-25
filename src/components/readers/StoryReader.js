@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Config from "../../Config";
 import Context from "../../Context";
@@ -15,7 +15,7 @@ export default class StoryReader extends Component {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.setState({ isLoading: true });
     try {
       const response = await fetch(
@@ -29,26 +29,15 @@ export default class StoryReader extends Component {
         })
       );
       if (!response.ok) {
+        console.error("Failed to load story", response);
         throw new Error("Something went wrong...");
       }
-      const data = await response.json();
-      if (!Array.isArray(data) || data.length === 0) {
-        this.setState({ error: { message: "Not found" }, isLoading: false });
-        this._isMounted = true;
-        return;
-      }
-
-      this.setState({ story: data[0], isLoading: false });
-      this._isMounted = true;
+      const story = await response.json();
+      this.setState({ story, isLoading: false });
       return;
     } catch (error) {
       this.setState({ error, isLoading: false });
-      this._isMounted = true;
     }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   render() {
@@ -64,30 +53,28 @@ export default class StoryReader extends Component {
 
     const date = new Date(story.lastEditedAt || story.createdAt);
     return (
-      <Router>
-        <div className="container">
-          <div className="card panel-default">
-            <div className="card-header text-center">
-              <b>{story.name}</b> — by{" "}
-              <Link to={`/user/${story.ownerId}=`}>{story.ownerId}</Link> —{" "}
-              {date.toDateString()}
-            </div>
-            <div className="card-body">
-              {story.content || "No content for now"}
-            </div>
-            <div className="card-footer">
-              <Link to={`/story/${story.id}/edit`}>
-                <button
-                  type="button"
-                  className="btn btn-lg btn-block btn-primary"
-                >
-                  Edit the story
-                </button>
-              </Link>
-            </div>
+      <div className="container">
+        <div className="card panel-default">
+          <div className="card-header text-center">
+            <b>{story.name}</b> — by{" "}
+            <Link to={`/user/${story.ownerId}=`}>{story.ownerId}</Link> —{" "}
+            {date.toDateString()}
+          </div>
+          <div className="card-body">
+            {story.content || "No content for now"}
+          </div>
+          <div className="card-footer">
+            <Link to={`/story/${story.id}/edit`}>
+              <button
+                type="button"
+                className="btn btn-lg btn-block btn-primary"
+              >
+                Edit the story
+              </button>
+            </Link>
           </div>
         </div>
-      </Router>
+      </div>
     );
   }
 }
