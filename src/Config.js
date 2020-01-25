@@ -1,4 +1,3 @@
-
 export class Config {
   constructor(local = process.env.NODE_ENV) {
     this.FRONT_BASE_URL = local === "development" ? "" : "/writtter";
@@ -10,10 +9,7 @@ export class Config {
    * @param {URI} url the path to target.
    */
   getApi(url = "") {
-    const u = `${this.API_BASE_URL}${url}`;
-    console.log("URL TO API: ", u);
-
-    return u;
+    return `${this.API_BASE_URL}${url}`;
   }
 
   /**
@@ -21,10 +17,7 @@ export class Config {
    * @param {URI} url the path to target.
    */
   getUrl(url = "") {
-    const u = `${this.FRONT_BASE_URL}${url}`;
-    // console.log("URL TO NEXT PAGE: ", u);
-
-    return u;
+    return `${this.FRONT_BASE_URL}${url}`;
   }
 }
 
