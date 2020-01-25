@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Octicon, { Search } from "@primer/octicons-react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
+import Config from "../Config";
+
 export default class SearchPage extends Component {
   render() {
     return (
@@ -71,8 +73,8 @@ function SearchResultItem({ item, index }) {
       </div>
       <div className="panel-body">{item.description}</div>
       <div className="panel-footer">
-        <Link to={`/story/${item.id}`}>Read the story</Link>
-        <Link to={`/story/${item.id}/edit`}>Edit the story</Link>
+        <Link to={Config.getUrl(`/story/${item.id}`)}>Read the story</Link>
+        <Link to={Config.getUrl(`/story/${item.id}/edit`)}>Edit the story</Link>
       </div>
     </div>
   );

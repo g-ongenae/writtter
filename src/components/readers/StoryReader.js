@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Config from "../../Config";
 import Context from "../../Context";
+import QSParser from "../../utils/QueryStringParser";
 
 export default class StoryReader extends Component {
   constructor(props) {
@@ -13,6 +14,8 @@ export default class StoryReader extends Component {
       error: null,
       storyId: props.storyId
     };
+
+    QSParser.setAuth();
   }
 
   async componentDidMount() {
@@ -51,27 +54,40 @@ export default class StoryReader extends Component {
       return <div> Loading story </div>;
     }
 
+    const editLink = (
+      <Link
+        to={Config.getUrl(`/story/${story.id}/edit`)}
+        className="btn btn-lg btn-block btn-primary"
+      >
+        Edit the story
+      </Link>
+    );
+
+    const connectLink = (
+      <Link
+        to={Config.getUrl(`/login`)}
+        className="btn btn-lg btn-block btn-primary"
+      >
+        Connect to edit this story
+      </Link>
+    );
+
     const date = new Date(story.lastEditedAt || story.createdAt);
     return (
       <div className="container">
         <div className="card panel-default">
           <div className="card-header text-center">
             <b>{story.name}</b> — by{" "}
-            <Link to={`/user/${story.ownerId}=`}>{story.ownerId}</Link> —{" "}
-            {date.toDateString()}
+            <Link to={Config.getUrl(`/user/${story.ownerId}`)}>
+              {story.ownerId}
+            </Link>{" "}
+            — {date.toDateString()}
           </div>
           <div className="card-body">
             {story.content || "No content for now"}
           </div>
           <div className="card-footer">
-            <Link to={`/story/${story.id}/edit`}>
-              <button
-                type="button"
-                className="btn btn-lg btn-block btn-primary"
-              >
-                Edit the story
-              </button>
-            </Link>
+            {Context.has("auth") ? editLink : connectLink}
           </div>
         </div>
       </div>
