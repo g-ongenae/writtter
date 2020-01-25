@@ -77,7 +77,7 @@ export default class Stories extends Component {
     }
 
     const storyList = stories.map(story => (
-      <li key={story.id}>
+      <li key={story.id} className="list-group-item text-secondary">
         <b>
           <Link to={Config.getUrl(`/story/${story.id}`)}>{story.name}</Link>
         </b>{" "}
@@ -90,7 +90,7 @@ export default class Stories extends Component {
     ));
 
     return (
-      <ul name="rules" className="form-control" multiple>
+      <ul name="rules" className="list-group">
         {storyList}
       </ul>
     );
