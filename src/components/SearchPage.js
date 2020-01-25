@@ -71,8 +71,8 @@ function SearchResultItem({ item, index }) {
       </div>
       <div className="panel-body">{item.description}</div>
       <div className="panel-footer">
-        <Link to={`/stories/${item.id}`}>Read the story</Link>
-        <Link to={`/stories/${item.id}/edit`}>Edit the story</Link>
+        <Link to={`/story/${item.id}`}>Read the story</Link>
+        <Link to={`/story/${item.id}/edit`}>Edit the story</Link>
       </div>
     </div>
   );

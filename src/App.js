@@ -45,7 +45,7 @@ export default class App extends Component {
             <Route path={Config.getUrl('/user/:userId')} component={({ match }) => (<UserPage userId={match.params.userId}/>)} />
             <Route path={Config.getUrl('/login')} component={Connect} />
             <Route path={Config.getUrl('/register')} component={CreateUser} />
-            <Route path="/stories/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
+            <Route path="/story/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
             <Route exact path="/" component={HomePage} />
           </Switch>
         </Router>
