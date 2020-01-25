@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import Stories from "./lists/Stories";
+
 export default class HomePage extends Component {
   constructor(params) {
     super(params);
@@ -11,10 +13,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <section className="App-section">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <h1>Writtter</h1>
-        <h4>The place to play with words and stories, together.</h4>
-        <p>Coming Soon</p>
+        <Stories></Stories>
       </section>
     );
   }
