@@ -1,12 +1,87 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+import Config from "../../Config";
+import Context from "../../Context";
 
 export default class Stories extends Component {
   constructor(props) {
     super(props);
-
-    console.log("Hello");
+    this.state = {
+      stories: null,
+      isLoading: false,
+      userId: props.userId || null,
+      liked: props.liked || false,
+    };
   }
+
+  async componentDidMount() {
+    this.setState({ isLoading: true });
+
+    try {
+      let headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      };
+      
+      if (Context.has("auth")) {
+        headers = { ...headers, ...Context.get("auth") }; 
+      }
+
+      const request =  {
+        method: "GET",
+        headers,
+      };
+
+      let response;
+
+      if (this.state.userId && !this.state.liked) {
+        response = await fetch(Config.getApi(`/stories/users/${this.state.userId}`), request);
+      } else if (this.state.userId && this.state.liked) {
+        response = await fetch(Config.getApi(`/stories/likes/${this.state.userId}`), request);
+      } else {
+        response = await fetch(Config.getApi("/stories/all"), request);
+      }
+
+      if (!response.ok) {
+        throw new Error("Could not fetch stories");
+      }
+
+      const stories = await response.json();
+      console.log("response: ", stories);
+      this.setState({ stories, isLoading: false });
+    } catch (error) {
+      this.setState({ error, isLoading: false });
+    }
+  }
+
   render() {
-    return <h1>Hello here are the stories</h1>;
+    const { stories, isLoading, error } = this.state;
+
+    if (error) {
+      return <p>An error occurred, sorry: {error.message}</p>;
+    }
+
+    if (isLoading || !stories) {
+      return <div> Loading story </div>;
+    }
+
+    if (Array.isArray(stories) && stories.length === 0) {
+      return <div> No stories </div>;
+    }
+
+    const storyList = stories.map(story => (
+      <li key={story.id}>
+        <b><Link to={Config.getUrl(`/story/${story.id}}`)}>{story.name}</Link></b> — by{" "}
+        <Link to={Config.getUrl(`/user/${story.ownerId}`)}>{story.ownerId}</Link> —{" "}
+        {(new Date(story.lastEditedAt || story.createdAt)).toDateString()}
+      </li>
+    ));
+
+    return (
+      <ul name="rules" className="form-control" multiple>
+        {storyList}
+      </ul>
+    );
   }
 }
