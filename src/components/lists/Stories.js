@@ -65,7 +65,12 @@ export default class Stories extends Component {
     const { stories, isLoading, error } = this.state;
 
     if (error) {
-      return <div className="App-section"> An error occurred, sorry: {error.message} </div>;
+      return (
+        <div className="App-section">
+          {" "}
+          An error occurred, sorry: {error.message}{" "}
+        </div>
+      );
     }
 
     if (isLoading || !stories) {

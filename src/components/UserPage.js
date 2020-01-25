@@ -90,7 +90,10 @@ export default class UserPage extends Component {
             </h1>
           </div>
 
-          <UserMenu userId={this.state.userId} activeViewName={window.location.pathname} />
+          <UserMenu
+            userId={this.state.userId}
+            activeViewName={window.location.pathname}
+          />
 
           <Switch>
             <Route path={Config.getUrl("/user/:userId/stories")}>

@@ -20,7 +20,7 @@ export default class StoryReader extends Component {
       isPublic: false,
       isCommentsDisabled: false,
       description: "",
-      content: "",
+      content: ""
     };
 
     this.toggleForm = this.toggleForm.bind(this);
@@ -135,7 +135,9 @@ export default class StoryReader extends Component {
               <i>{this.state.name}</i>
             </Link>{" "}
             by{" "}
-            <Link to={Config.getUrl(`/user/${this.state.ownerId}`)}>{this.state.ownerId}</Link>{" "}
+            <Link to={Config.getUrl(`/user/${this.state.ownerId}`)}>
+              {this.state.ownerId}
+            </Link>{" "}
           </h1>
 
           {!this.state.formIsHidden && <StoryEditorForm binder={this} />}
@@ -146,9 +148,11 @@ export default class StoryReader extends Component {
             <div className="card-header text-center">
               <button className="btn btn-primary" onClick={this.toggleForm}>
                 <Octicon icon={Fold} /> Toggle story properties
-              </button>
-              {" "}
-              <Link className="btn btn-primary" to={Config.getUrl(`/story/${storyId}`)}>
+              </button>{" "}
+              <Link
+                className="btn btn-primary"
+                to={Config.getUrl(`/story/${storyId}`)}
+              >
                 <Octicon icon={ArrowLeft} /> Back
               </Link>
             </div>
@@ -170,7 +174,9 @@ export default class StoryReader extends Component {
                 className="btn btn-lg btn-block btn-primary"
                 placeholder="Edit the story"
                 onClick={this.handleSubmit}
-              >Edit the story</button>
+              >
+                Edit the story
+              </button>
             </div>
           </div>
         </div>
@@ -178,7 +184,6 @@ export default class StoryReader extends Component {
     );
   }
 }
-
 
 function StoryEditorForm({ binder }) {
   return (
@@ -237,11 +242,7 @@ function StoryEditorForm({ binder }) {
         </fieldset>
       */}
       <fieldset className="form-group text-center">
-        <input
-          type="submit"
-          value="Edit story"
-          className="btn btn-primary"
-        />
+        <input type="submit" value="Edit story" className="btn btn-primary" />
       </fieldset>
     </form>
   );

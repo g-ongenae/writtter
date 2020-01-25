@@ -19,7 +19,7 @@ export class QSParser {
 
     const auth = {
       authorization: token,
-      "x-access-token": token,
+      "x-access-token": token
     };
     Context.set("auth", auth);
   }
