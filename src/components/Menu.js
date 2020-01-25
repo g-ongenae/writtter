@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Config from "../Config";
+import Context from "../Context";
 
-export default function Menu({ loggedIn }) {
+export default function Menu() {
   const logButtons = [];
-  // TODO simplify
-  if (!loggedIn) {
+  // TODO simplify 
+  if (!Context.has("auth")) {
     logButtons.push(
       <li className="nav-item">
         <Link className="nav-link" to={Config.getUrl("/login")}>
@@ -30,10 +31,10 @@ export default function Menu({ loggedIn }) {
       </li>
     );
     logButtons.push(
-      <li className="nav-item">
-        <Link className="nav-link" to={Config.getUrl("/logout")}>
+      <li className="nav-item" onClick={() => { Context.unset("auth"); window.location.href = Config.getUrl("/"); }}>
+        <span className="nav-link" style={{color: "lightcoral"}}>
           Log out
-        </Link>
+        </span>
       </li>
     );
   }
