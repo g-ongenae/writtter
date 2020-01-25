@@ -33,7 +33,7 @@ export default class App extends Component {
             <Route path={Config.getUrl('/profile')}>
               <UserPage userId={this.state.userId} />
             </Route>
-            <Route path={Config.getUrl('/user')} component={UserPage} />
+            <Route path={Config.getUrl('/user/:userId')} component={({ match }) => (<UserPage userId={match.params.userId}/>)} />
             <Route path={Config.getUrl('/login')} component={Connect} />
             <Route path={Config.getUrl('/register')} component={CreateUser} />
             <Route path="/stories/:id" component={({ match }) => (<StoryReader storyId={match.params.id} />)} />
