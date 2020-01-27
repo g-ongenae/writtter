@@ -11,7 +11,8 @@ export default class CreateUser extends Component {
       email: "",
       password: "",
       data: null,
-      auth: null
+      auth: null,
+      error: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,8 +29,7 @@ export default class CreateUser extends Component {
     // Prevent from refreshing
     event.preventDefault();
 
-    // Send data to the server
-    const response = await fetch(Config.getApi("/users"), {
+    const request = {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -40,25 +40,45 @@ export default class CreateUser extends Component {
         email: this.state.email,
         password: this.state.password
       })
-    });
-
-    const data = await response.json();
-    const auth = {
-      authorization: response.headers.get("authorization"),
-      "x-access-token": response.headers.get("x-access-token")
     };
-    this.setState({ data, auth });
-    console.log("Register Request", JSON.stringify(this.state));
 
-    // Redirect
-    window.location.href = Config.getUrl(`/?a=${auth.authorization}`);
+    try {
+      // Send data to the server
+      const response = await fetch(Config.getApi("/users"), request);
+
+      console.log(JSON.stringify(response), "here", event);
+      if (!response.ok) {
+        console.error("Failed to create user: ", JSON.stringify(response));
+        throw new Error(response.statusText);
+      }
+
+      const data = await response.json();
+      const auth = {
+        authorization: response.headers.get("authorization"),
+        "x-access-token": response.headers.get("x-access-token")
+      };
+      this.setState({ data, auth });
+      console.log("Register Request", JSON.stringify(this.state));
+
+      // Redirect
+      window.location.href = Config.getUrl(`/?a=${auth.authorization}`);
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 
   render() {
+    let err;
+    if (this.state.error) {
+      err = (<h1>An error occurred: {this.state.error.message}</h1>);
+    }
+
     return (
       <div className="App-sub-section">
         <div className="container">
           <h1>Create a new account</h1>
+
+          {err}
 
           <form onSubmit={this.handleSubmit}>
             <fieldset className="form-group">
