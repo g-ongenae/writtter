@@ -45,8 +45,6 @@ export default class CreateUser extends Component {
     try {
       // Send data to the server
       const response = await fetch(Config.getApi("/users"), request);
-
-      console.log(JSON.stringify(response), "here", event);
       if (!response.ok) {
         console.error("Failed to create user: ", JSON.stringify(response));
         throw new Error(response.statusText);
@@ -70,7 +68,9 @@ export default class CreateUser extends Component {
   render() {
     let err;
     if (this.state.error) {
-      err = (<h1>An error occurred: {this.state.error.message}</h1>);
+      err = (<div class="alert alert-danger" role="alert">
+        <i>An error occurred: </i>{this.state.error.message || "unknown error"}
+      </div>);
     }
 
     return (
