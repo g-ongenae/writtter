@@ -72,40 +72,40 @@ export default class Connect extends Component {
   render() {
     return (
       <div className="App-sub-section">
-      <div className="container">
-        <h1> Connect </h1>
-        <form onSubmit={this.handleSubmit}>
-          <fieldset className="form-group">
-            <label>Username:</label>
-            <input
-              id="username"
-              type="text"
-              name="title"
-              className="form-control"
-              placeholder="Enter your username"
-              value={this.state.username}
-              onChange={this.handleChange.bind(this, "username")}
-              required
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Password:</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Enter your password"
-              value={this.state.password}
-              onChange={this.handleChange.bind(this, "password")}
-              required
-            />
-          </fieldset>
-          <fieldset className="form-group text-center">
-            <input type="submit" value="Log in" className="btn btn-primary" />
-          </fieldset>
-        </form>
-      </div>
+        <div className="container">
+          <h1> Connect </h1>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset className="form-group">
+              <label>Username:</label>
+              <input
+                id="username"
+                type="text"
+                name="title"
+                className="form-control"
+                placeholder="Enter your username"
+                value={this.state.username}
+                onChange={this.handleChange.bind(this, "username")}
+                required
+              />
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Password:</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Enter your password"
+                value={this.state.password}
+                onChange={this.handleChange.bind(this, "password")}
+                required
+              />
+            </fieldset>
+            <fieldset className="form-group text-center">
+              <input type="submit" value="Log in" className="btn btn-primary" />
+            </fieldset>
+          </form>
+        </div>
       </div>
     );
   }

@@ -57,87 +57,87 @@ export default class CreateUser extends Component {
   render() {
     return (
       <div className="App-sub-section">
-      <div className="container">
-        <h1>Create a new account</h1>
+        <div className="container">
+          <h1>Create a new account</h1>
 
-        <form onSubmit={this.handleSubmit}>
-          <fieldset className="form-group">
-            <label>Username:</label>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <div className="input-group-text">@</div>
-              </div>
-              <input
-                value={this.state.username}
-                onChange={this.handleChange.bind(this, "username")}
-                id="username"
-                type="text"
-                name="title"
-                className="form-control"
-                placeholder="Enter your username"
-                required
-              />
-            </div>
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Email:</label>
-            <input
-              value={this.state.email}
-              onChange={this.handleChange.bind(this, "email")}
-              id="email"
-              type="email"
-              name="email"
-              className="form-control"
-              placeholder="Enter your email address"
-              required
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Password:</label>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <div className="input-group-text">
-                  <Octicon icon={Eye} />
+          <form onSubmit={this.handleSubmit}>
+            <fieldset className="form-group">
+              <label>Username:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">@</div>
                 </div>
+                <input
+                  value={this.state.username}
+                  onChange={this.handleChange.bind(this, "username")}
+                  id="username"
+                  type="text"
+                  name="title"
+                  className="form-control"
+                  placeholder="Enter your username"
+                  required
+                />
               </div>
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Email:</label>
               <input
-                value={this.state.password}
-                onChange={this.handleChange.bind(this, "password")}
-                id="password"
-                type="password"
-                name="password"
+                value={this.state.email}
+                onChange={this.handleChange.bind(this, "email")}
+                id="email"
+                type="email"
+                name="email"
                 className="form-control"
-                placeholder="Enter your password"
+                placeholder="Enter your email address"
                 required
               />
-            </div>
-            <small id="passwordHelpInline" className="text-muted">
-              Must be 8-20 characters long.
-            </small>
-          </fieldset>
-          <fieldset className="form-group">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="rules"
-              required
-            />
-            <label className="form-check-label">
-              Accept rules and email subscription
-            </label>
-            <small id="passwordHelpInline" className="text-muted">
-              No commercial offer will be send to you, just regular usage.
-            </small>
-          </fieldset>
-          <fieldset className="form-group text-center">
-            <input
-              type="submit"
-              value="Create account"
-              className="btn btn-primary"
-            />
-          </fieldset>
-        </form>
-      </div>
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Password:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">
+                    <Octicon icon={Eye} />
+                  </div>
+                </div>
+                <input
+                  value={this.state.password}
+                  onChange={this.handleChange.bind(this, "password")}
+                  id="password"
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <small id="passwordHelpInline" className="text-muted">
+                Must be 8-20 characters long.
+              </small>
+            </fieldset>
+            <fieldset className="form-group">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="rules"
+                required
+              />
+              <label className="form-check-label">
+                Accept rules and email subscription
+              </label>
+              <small id="passwordHelpInline" className="text-muted">
+                No commercial offer will be send to you, just regular usage.
+              </small>
+            </fieldset>
+            <fieldset className="form-group text-center">
+              <input
+                type="submit"
+                value="Create account"
+                className="btn btn-primary"
+              />
+            </fieldset>
+          </form>
+        </div>
       </div>
     );
   }

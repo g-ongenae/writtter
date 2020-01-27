@@ -22,28 +22,28 @@ function SearchBar() {
     <div className="container">
       <h1> Search Page </h1>
       <div className="App-sub-section">
-      <form className="form-row">
-        <div className="col-sm-2"></div>
-        <fieldset className="col-sm-7 form-group">
-          <div className="input-group">
-            <div className="input-group-prepend">
-              <div className="input-group-text">
-                <Octicon icon={Search} />
+        <form className="form-row">
+          <div className="col-sm-2"></div>
+          <fieldset className="col-sm-7 form-group">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <div className="input-group-text">
+                  <Octicon icon={Search} />
+                </div>
               </div>
+              <input
+                id="search"
+                type="search"
+                name="search"
+                className="form-control"
+                required
+              />
             </div>
-            <input
-              id="search"
-              type="search"
-              name="search"
-              className="form-control"
-              required
-            />
-          </div>
-        </fieldset>
-        <fieldset className="col-sm-2 form-group">
-          <input type="submit" value="Search" className="btn btn-primary" />
-        </fieldset>
-      </form>
+          </fieldset>
+          <fieldset className="col-sm-2 form-group">
+            <input type="submit" value="Search" className="btn btn-primary" />
+          </fieldset>
+        </form>
       </div>
     </div>
   );

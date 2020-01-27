@@ -69,71 +69,71 @@ export default class CreateStory extends Component {
   render() {
     return (
       <div className="App-sub-section">
-      <div className="container">
-        <h1>Create a new story</h1>
+        <div className="container">
+          <h1>Create a new story</h1>
 
-        <form onSubmit={this.handleSubmit}>
-          <fieldset className="form-group">
-            <label htmlFor="title">Title:</label>
-            <input
-              id="title"
-              type="text"
-              name="title"
-              className="form-control"
-              placeholder="Enter title"
-              value={this.state.name}
-              onChange={this.handleChange.bind(this, "name")}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Description:</label>
-            <textarea
-              name="description"
-              className="form-control"
-              placeholder="Write a description for your story"
-              rows="3"
-              value={this.state.description}
-              onChange={this.handleChange.bind(this, "description")}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="isPublic"
-              value={this.state.isPublic}
-              onChange={this.handleCheck.bind(this, "isPublic")}
-            />
-            <label className="form-check-label">Public Mode</label>
-          </fieldset>
-          <fieldset className="form-group">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="commentsEnabled"
-              defaultChecked
-              value={this.state.isCommentsDisabled}
-              onChange={this.handleCheck.bind(this, "isCommentsDisabled")}
-            />
-            <label className="form-check-label">Comments enabled</label>
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Rules:</label>
-            <RuleChoices userId={this.props.userId} />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Tags:</label>
-            <TagChoices userId={this.props.userId} />
-          </fieldset>
-          <fieldset className="form-group text-center">
-            <input
-              type="submit"
-              value="Create story"
-              className="btn btn-primary"
-            />
-          </fieldset>
-        </form>
-      </div>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset className="form-group">
+              <label htmlFor="title">Title:</label>
+              <input
+                id="title"
+                type="text"
+                name="title"
+                className="form-control"
+                placeholder="Enter title"
+                value={this.state.name}
+                onChange={this.handleChange.bind(this, "name")}
+              />
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Description:</label>
+              <textarea
+                name="description"
+                className="form-control"
+                placeholder="Write a description for your story"
+                rows="3"
+                value={this.state.description}
+                onChange={this.handleChange.bind(this, "description")}
+              />
+            </fieldset>
+            <fieldset className="form-group">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="isPublic"
+                value={this.state.isPublic}
+                onChange={this.handleCheck.bind(this, "isPublic")}
+              />
+              <label className="form-check-label">Public Mode</label>
+            </fieldset>
+            <fieldset className="form-group">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="commentsEnabled"
+                defaultChecked
+                value={this.state.isCommentsDisabled}
+                onChange={this.handleCheck.bind(this, "isCommentsDisabled")}
+              />
+              <label className="form-check-label">Comments enabled</label>
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Rules:</label>
+              <RuleChoices userId={this.props.userId} />
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Tags:</label>
+              <TagChoices userId={this.props.userId} />
+            </fieldset>
+            <fieldset className="form-group text-center">
+              <input
+                type="submit"
+                value="Create story"
+                className="btn btn-primary"
+              />
+            </fieldset>
+          </form>
+        </div>
       </div>
     );
   }

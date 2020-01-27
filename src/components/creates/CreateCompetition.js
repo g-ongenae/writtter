@@ -23,71 +23,71 @@ export default class CreateCompetition extends Component {
   render() {
     return (
       <div className="App-sub-section">
-      <div className="container">
-        <h1>Create a new competition</h1>
+        <div className="container">
+          <h1>Create a new competition</h1>
 
-        <form>
-          <fieldset className="form-group">
-            <label htmlFor="title">Title:</label>
-            <input
-              value={this.state.name}
-              onChange={this.handleChange.bind(this, "name")}
-              id="name"
-              type="text"
-              name="name"
-              className="form-control"
-              placeholder="Enter title"
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Description:</label>
-            <textarea
-              value={this.state.description}
-              onChange={this.handleChange.bind(this, "description")}
-              name="description"
-              className="form-control"
-              placeholder="Write a description for your story"
-              rows="3"
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Due date:</label>
-            <DatePicker competition={this} />
-          </fieldset>
-          <fieldset className="form-group">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="isPublic"
-            />
-            <label className="form-check-label">Public Mode</label>
-          </fieldset>
-          <fieldset className="form-group">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="commentsEnabled"
-              defaultChecked
-            />
-            <label className="form-check-label">Comments enabled</label>
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Rules:</label>
-            <RuleChoices userId={this.props.userId} binder={this} />
-          </fieldset>
-          <fieldset className="form-group">
-            <label>Tags:</label>
-            <TagChoices userId={this.props.userId} binder={this} />
-          </fieldset>
-          <fieldset className="form-group text-center">
-            <input
-              type="submit"
-              value="Create competition"
-              className="btn btn-primary"
-            />
-          </fieldset>
-        </form>
-      </div>
+          <form>
+            <fieldset className="form-group">
+              <label htmlFor="title">Title:</label>
+              <input
+                value={this.state.name}
+                onChange={this.handleChange.bind(this, "name")}
+                id="name"
+                type="text"
+                name="name"
+                className="form-control"
+                placeholder="Enter title"
+              />
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Description:</label>
+              <textarea
+                value={this.state.description}
+                onChange={this.handleChange.bind(this, "description")}
+                name="description"
+                className="form-control"
+                placeholder="Write a description for your story"
+                rows="3"
+              />
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Due date:</label>
+              <DatePicker competition={this} />
+            </fieldset>
+            <fieldset className="form-group">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="isPublic"
+              />
+              <label className="form-check-label">Public Mode</label>
+            </fieldset>
+            <fieldset className="form-group">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                name="commentsEnabled"
+                defaultChecked
+              />
+              <label className="form-check-label">Comments enabled</label>
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Rules:</label>
+              <RuleChoices userId={this.props.userId} binder={this} />
+            </fieldset>
+            <fieldset className="form-group">
+              <label>Tags:</label>
+              <TagChoices userId={this.props.userId} binder={this} />
+            </fieldset>
+            <fieldset className="form-group text-center">
+              <input
+                type="submit"
+                value="Create competition"
+                className="btn btn-primary"
+              />
+            </fieldset>
+          </form>
+        </div>
       </div>
     );
   }

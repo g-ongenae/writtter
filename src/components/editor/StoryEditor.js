@@ -128,60 +128,60 @@ export default class StoryReader extends Component {
 
     return (
       <div className="App-sub-section">
-      <div className="container">
-        <div>
-          <h1>
-            Edit{" "}
-            <Link to={Config.getUrl(`/story/${storyId}`)}>
-              <i>{this.state.name}</i>
-            </Link>{" "}
-            by{" "}
-            <Link to={Config.getUrl(`/user/${this.state.ownerId}`)}>
-              {this.state.ownerId}
-            </Link>{" "}
-          </h1>
+        <div className="container">
+          <div>
+            <h1>
+              Edit{" "}
+              <Link to={Config.getUrl(`/story/${storyId}`)}>
+                <i>{this.state.name}</i>
+              </Link>{" "}
+              by{" "}
+              <Link to={Config.getUrl(`/user/${this.state.ownerId}`)}>
+                {this.state.ownerId}
+              </Link>{" "}
+            </h1>
 
-          {!this.state.formIsHidden && <StoryEditorForm binder={this} />}
-        </div>
+            {!this.state.formIsHidden && <StoryEditorForm binder={this} />}
+          </div>
 
-        <div>
-          <div className="card panel-default">
-            <div className="card-header text-center">
-              <button className="btn btn-primary" onClick={this.toggleForm}>
-                <Octicon icon={Fold} /> Toggle story properties
-              </button>{" "}
-              <Link
-                className="btn btn-primary"
-                to={Config.getUrl(`/story/${storyId}`)}
-              >
-                <Octicon icon={ArrowLeft} /> Back
-              </Link>
-            </div>
-            <div className="card-body">
-              <textarea
-                form="storyEditor"
-                name="content"
-                className="form-control"
-                placeholder="Write your story here"
-                rows="3"
-                value={this.state.content}
-                onChange={this.handleChange.bind(this, "content")}
-              />
-            </div>
-            <div className="card-footer">
-              <button
-                form="storyEditor"
-                type="button"
-                className="btn btn-lg btn-block btn-primary"
-                placeholder="Edit the story"
-                onClick={this.handleSubmit}
-              >
-                Edit the story
-              </button>
+          <div>
+            <div className="card panel-default">
+              <div className="card-header text-center">
+                <button className="btn btn-primary" onClick={this.toggleForm}>
+                  <Octicon icon={Fold} /> Toggle story properties
+                </button>{" "}
+                <Link
+                  className="btn btn-primary"
+                  to={Config.getUrl(`/story/${storyId}`)}
+                >
+                  <Octicon icon={ArrowLeft} /> Back
+                </Link>
+              </div>
+              <div className="card-body">
+                <textarea
+                  form="storyEditor"
+                  name="content"
+                  className="form-control"
+                  placeholder="Write your story here"
+                  rows="3"
+                  value={this.state.content}
+                  onChange={this.handleChange.bind(this, "content")}
+                />
+              </div>
+              <div className="card-footer">
+                <button
+                  form="storyEditor"
+                  type="button"
+                  className="btn btn-lg btn-block btn-primary"
+                  placeholder="Edit the story"
+                  onClick={this.handleSubmit}
+                >
+                  Edit the story
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     );
   }
