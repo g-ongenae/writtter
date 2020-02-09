@@ -1,61 +1,91 @@
 # Writtter
 
-## Install
+> Note: you cannot run the project simutaneously on the front and the back without cloning the project in two different folder.
+
+## Run the back
+
+You will need to have MySQL installed on your machine and started.
 
 Locally:
 
 ```bash
 git clone git@github.com:g-ongenae/writtter.git
 
-# Back (cd back)
+# Go to the back branch
+git checkout master
+
+# Install dependencies
 npm install
 
-# Front (cd front)
-npm install
+# Launch the app
+npm start
+
+## Or to run in development mode (relauch on modification)
+npm run dev
 ```
 
-On docker:
-
-```bash
-git clone git@github.com:g-ongenae/writtter.git
-
-# Back (cd back)
-docker build
-
-# Front (cd front)
-docker build
-```
-
-## Run
+## Run the front
 
 Locally:
 
 ```bash
-# Back (cd back)
+# Go to the Front branch
+git checkout front
+
+# Install dependencies
+npm install
+
+# If you don't launch a local back-end
+# you will need to comment the Config.js base url to the local back end 
+# and use the remote (production one, not safe for a real case, but here it doesn't matter).
+
+# Start the app
 npm start
 
-# Front (cd front)
-npm start
-
+# Open your favorite browser
 open https://localhost:8080
 ```
 
-On docker:
+## Run Test
 
 ```bash
-# Back (cd back)
-docker run
+# Back
+git checkout master
+npm install
+npm test
 
-# Front (cd front)
-docker run
+# Front
+git checkout front
+npm install
+npm test
 ```
 
-Test:
+## Deploy
+
+To deploy, we use Heroku and GitHub Pages.
+
+Back end deployment process:
 
 ```bash
-# Back (cd back)
-npm test
+# Go the back end branch
+git checkout master
 
-# Front (cd front)
-npm test
+# make your modification on the back and commit them
+git commit -a -m "Modify this..."
+
+# Push and deploy them to the server
+git push heroku master
+```
+
+Front end deployment process:
+
+```bash
+# Go to the front end branch
+git checkout front
+
+# make your modification on the front and commit them
+git commit -a -m "Modify this..."
+
+# Push and deploy them to the server
+npm run deploy
 ```
