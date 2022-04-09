@@ -59,7 +59,7 @@
     "koa-log": "2.1.0",
     "koa-router": "7.4.0",
     "lodash": "4.17.21",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "node-emoji": "1.10.0",
     "postguard": "0.2.0",
     "promise-mysql": "4.1.1",
